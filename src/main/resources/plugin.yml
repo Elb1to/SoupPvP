@@ -1,0 +1,6 @@
+name: SoupPvP
+version: ${project.version}
+main: me.elb1to.souppvp.SoupPvP
+author: Elb1to
+description: Lunar Network SoupPvP gamemode replica
+website: https://store.frozed.club
