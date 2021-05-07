@@ -1,0 +1,9 @@
+MONGO:
+  HOST: "127.0.0.1"
+  PORT: 27017
+  DATABASE: "soup_pvp"
+  AUTH:
+    ENABLED: false
+    USERNAME: "user"
+    PASSWORD: "pass"
+    AUTH-DATABASE: "admin"
