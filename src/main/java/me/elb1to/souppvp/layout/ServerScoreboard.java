@@ -8,7 +8,10 @@ import me.elb1to.souppvp.utils.scoreboard.BoardStyle;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static me.elb1to.souppvp.utils.CC.translate;
 
 /**
  * Created by Elb1to
@@ -21,24 +24,23 @@ public class ServerScoreboard implements BoardAdapter {
 
 	@Override
 	public String getTitle(Player player) {
-		return CC.translate("&b&lSoupPvP");
+		return translate("&b&lSoupPvP");
 	}
 
 	@Override
 	public List<String> getLines(Player player) {
-		ArrayList<String> scoreboard = new ArrayList<>();
 		PlayerProfile playerProfile = this.plugin.getProfileManager().getProfileByUuid(player.getUniqueId());
 
-		scoreboard.add(CC.translate("&7&m----------------------"));
-		scoreboard.add(CC.translate("Kills: &b" + playerProfile.getKills()));
-		scoreboard.add(CC.translate("Killstreak: &b" + playerProfile.getCurrentKillstreak()));
-		scoreboard.add(CC.translate("Deaths: &b" + playerProfile.getDeaths()));
-		scoreboard.add(CC.translate("Credits: &b" + playerProfile.getCredits()));
-		scoreboard.add(CC.translate(" "));
-		scoreboard.add(CC.translate("&bfrozed.club"));
-		scoreboard.add(CC.translate("&7&m----------------------"));
-
-		return scoreboard;
+        return Arrays.asList(
+            translate("&7&m----------------------"),
+            translate("Kills: &b" + playerProfile.getKills()),
+            translate("Killstreak: &b" + playerProfile.getCurrentKillstreak()),
+            translate("Deaths: &b" + playerProfile.getDeaths()),
+            translate("Credits: &b" + playerProfile.getCredits()),
+            translate(" "),
+            translate("&bfrozed.club"),
+            translate("&7&m----------------------")
+        );
 	}
 
 	@Override
