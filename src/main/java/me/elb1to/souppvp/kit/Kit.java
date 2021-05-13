@@ -4,10 +4,8 @@ import lombok.Getter;
 import me.elb1to.souppvp.utils.CC;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 
@@ -20,12 +18,14 @@ import java.util.Arrays;
 public abstract class Kit {
 
 	private final String name;
+	private final Material icon;
 	private final String[] desc;
 	private final int price;
 
-	public Kit(String name, String[] desc, int price) {
+	public Kit(String name, Material icon, String[] desc, int price) {
 		this.name = name;
-		this.desc = desc;
+        this.icon = icon;
+        this.desc = desc;
 		this.price = price;
 	}
 
@@ -38,7 +38,7 @@ public abstract class Kit {
 		this.giveSoups(player);
 
 		player.updateInventory();
-		player.sendMessage(CC.translate("&aYou've equipped the " + this.name + " kit!"));
+        player.sendMessage(CC.translate("&eYou have chosen the &d" + this.getName() + "&e kit."));
 	}
 
 	public abstract PotionEffect[] getPotionEffects();
