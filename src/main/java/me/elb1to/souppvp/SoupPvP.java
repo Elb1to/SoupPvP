@@ -5,7 +5,7 @@ import me.elb1to.souppvp.controller.ClassRegistrationController;
 import me.elb1to.souppvp.database.MongoSrv;
 import me.elb1to.souppvp.kit.KitManager;
 import me.elb1to.souppvp.layout.ServerScoreboard;
-import me.elb1to.souppvp.user.PlayerProfileManager;
+import me.elb1to.souppvp.user.UserManager;
 import me.elb1to.souppvp.utils.CC;
 import me.elb1to.souppvp.utils.command.CommandFramework;
 import me.elb1to.souppvp.utils.scoreboard.BoardManager;
@@ -25,7 +25,7 @@ public final class SoupPvP extends JavaPlugin {
 	private final ClassRegistrationController crc = new ClassRegistrationController();
 
 	private KitManager kitManager;
-	private PlayerProfileManager profileManager;
+	private UserManager userManager;
 
 	@Override
 	public void onEnable() {
@@ -48,13 +48,13 @@ public final class SoupPvP extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		new MongoSrv().disconnect();
+
 	}
 
 	private void loadManagers() {
 		this.kitManager = new KitManager();
 		this.kitManager.loadKits();
 
-		this.profileManager = new PlayerProfileManager();
+		this.userManager = new UserManager();
 	}
 }
