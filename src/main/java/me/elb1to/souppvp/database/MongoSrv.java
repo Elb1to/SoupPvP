@@ -39,7 +39,7 @@ public class MongoSrv {
 
 	private boolean connected;
 
-	private MongoCollection<Document> profiles;
+	private MongoCollection<Document> users;
 
 	public MongoSrv() {
 		instance = this;
@@ -53,10 +53,14 @@ public class MongoSrv {
 			}
 			connected = true;
 			mongoDatabase = client.getDatabase(database);
-			this.profiles = this.mongoDatabase.getCollection("profiles");
+			this.users = this.mongoDatabase.getCollection("users");
 		} catch (Exception e) {
+			connected = false;
 			Bukkit.getConsoleSender().sendMessage(CC.translate("&b[SoupPvP] &cFailed to connect to MongoDB"));
+			e.printStackTrace();
+
 			Bukkit.getServer().getPluginManager().disablePlugin(this.plugin);
+			Bukkit.getConsoleSender().sendMessage(CC.translate("&b[SoupPvP] &cDisabling plugin..."));
 		}
 	}
 
