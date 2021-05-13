@@ -6,10 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.database.MongoSrv;
-import me.elb1to.souppvp.kit.Kit;
 import org.bson.Document;
-import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -26,7 +26,8 @@ public class User {
 
 	private boolean loaded;
 
-	private Kit currentKit;
+    private String currentKitName = "Default";
+    private List<String> unlockedKits = new ArrayList<>();
 
 	private int credits;
 	private int kills;
@@ -39,11 +40,15 @@ public class User {
 		this.loaded = false;
 
 		load();
+		this.unlockedKits.add("Default");
 	}
 
 	public void load() {
 		Document document = MongoSrv.getInstance().getUsers().find(Filters.eq("uniqueId", uniqueId.toString())).first();
 		if (document != null) {
+            this.currentKitName = document.getString("currentKitName");
+            this.unlockedKits = (List<String>) document.get("unlockedKits");
+
 			this.kills = document.getInteger("kills");
 			this.deaths = document.getInteger("deaths");
 			this.credits = document.getInteger("credits");
@@ -57,6 +62,10 @@ public class User {
 	public void save() {
 		Document document = new Document();
 		document.put("uniqueId", this.uniqueId.toString());
+
+        document.put("currentKitName", this.currentKitName);
+        document.put("unlockedKits", this.unlockedKits);
+
 		document.put("kills", this.kills);
 		document.put("deaths", this.deaths);
 		document.put("credits", this.credits);
@@ -68,6 +77,7 @@ public class User {
 
 	public void delete() {
 		this.save();
+
 		userManager.getUsers().remove(this.uniqueId);
 	}
 }
