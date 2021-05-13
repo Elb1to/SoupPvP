@@ -13,9 +13,13 @@ import org.bukkit.potion.PotionEffect;
  */
 public class ProKit extends Kit {
 
-	public ProKit() {
-		super("Pro", null, 250);
-	}
+    public ProKit() {
+        super("Pro", Material.DIAMOND, new String[]{
+            "&7&oDouble credits when",
+            "&7&oyou kill another",
+            "&7&oplayers."
+        }, 250);
+    }
 
 	@Override
 	public ItemStack[] getArmor() {

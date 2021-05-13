@@ -16,15 +16,11 @@ import org.bukkit.potion.PotionEffectType;
  */
 public class DefaultKit extends Kit {
 
-	public DefaultKit() {
-		super("Default",
-				new String[]{
-						"",
-						""
-				},
-				0
-		);
-	}
+    public DefaultKit() {
+        super("Default", Material.DIAMOND_SWORD, new String[]{
+            "&7&oDefault PvP kit."
+        }, 0);
+    }
 
 	@Override
 	public ItemStack getSword() {
