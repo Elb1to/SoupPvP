@@ -1,13 +1,11 @@
 package me.elb1to.souppvp.layout;
 
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.user.PlayerProfile;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.utils.scoreboard.BoardAdapter;
 import me.elb1to.souppvp.utils.scoreboard.BoardStyle;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,31 +18,29 @@ import static me.elb1to.souppvp.utils.CC.translate;
  */
 public class ServerScoreboard implements BoardAdapter {
 
-	private final SoupPvP plugin = SoupPvP.getInstance();
+    @Override
+    public String getTitle(Player player) {
+        return translate("&b&lSoupPvP");
+    }
 
-	@Override
-	public String getTitle(Player player) {
-		return translate("&b&lSoupPvP");
-	}
-
-	@Override
-	public List<String> getLines(Player player) {
-		PlayerProfile playerProfile = this.plugin.getProfileManager().getProfileByUuid(player.getUniqueId());
+    @Override
+    public List<String> getLines(Player player) {
+        User user = SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId());
 
         return Arrays.asList(
             translate("&7&m----------------------"),
-            translate("Kills: &b" + playerProfile.getKills()),
-            translate("Killstreak: &b" + playerProfile.getCurrentKillstreak()),
-            translate("Deaths: &b" + playerProfile.getDeaths()),
-            translate("Credits: &b" + playerProfile.getCredits()),
+            translate("Kills: &b" + user.getKills()),
+            translate("Killstreak: &b" + user.getCurrentKillstreak()),
+            translate("Deaths: &b" + user.getDeaths()),
+            translate("Credits: &b" + user.getCredits()),
             translate(" "),
             translate("&bfrozed.club"),
             translate("&7&m----------------------")
         );
-	}
+    }
 
-	@Override
-	public BoardStyle getBoardStyle(Player player) {
-		return BoardStyle.MODERN;
-	}
+    @Override
+    public BoardStyle getBoardStyle(Player player) {
+        return BoardStyle.MODERN;
+    }
 }
