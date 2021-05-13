@@ -8,6 +8,7 @@ import me.elb1to.souppvp.layout.ServerScoreboard;
 import me.elb1to.souppvp.user.UserManager;
 import me.elb1to.souppvp.utils.CC;
 import me.elb1to.souppvp.utils.command.CommandFramework;
+import me.elb1to.souppvp.utils.menu.MenuUpdateTask;
 import me.elb1to.souppvp.utils.scoreboard.BoardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -42,6 +43,7 @@ public final class SoupPvP extends JavaPlugin {
 		this.loadManagers();
 		crc.loadListeners("me.elb1to.souppvp.listeners");
 		crc.loadCommands("me.elb1to.souppvp.commands");
+        this.getServer().getScheduler().runTaskTimerAsynchronously(this, new MenuUpdateTask(), 5L, 5L);
 
 		new BoardManager(new ServerScoreboard(), 20);
 	}
