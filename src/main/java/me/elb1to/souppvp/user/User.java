@@ -35,13 +35,13 @@ public class User {
 	private int currentKillstreak;
 	private int highestKillstreak;
 
-	public User(UUID uuid) {
-		this.uniqueId = uuid;
-		this.loaded = false;
+    public User(UUID uuid) {
+        this.uniqueId = uuid;
+        this.loaded = false;
+        this.unlockedKits.add("Default");
 
-		load();
-		this.unlockedKits.add("Default");
-	}
+        load();
+    }
 
 	public void load() {
 		Document document = MongoSrv.getInstance().getUsers().find(Filters.eq("uniqueId", uniqueId.toString())).first();
