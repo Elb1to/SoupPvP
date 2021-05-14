@@ -43,14 +43,15 @@ public class SelectKitButton extends Button {
 
     @Override
     public void clicked(Player player, int slot, ClickType clickType, int hotbarButton) {
-        if (!user.getUnlockedKits().contains(kit.getName()) && user.getCredits() < kit.getPrice()) {
-            player.sendMessage(CC.translate("&cNot enough credits!"));
-            return;
-        }
-        if (!user.getUnlockedKits().contains(kit.getName()) && user.getCredits() >= kit.getPrice()) {
-            user.getUnlockedKits().add(kit.getName());
-            user.setCredits(user.getCredits() - kit.getPrice());
-            player.sendMessage(CC.translate("&eYou have purchased the &d" + kit.getName() + "&e kit."));
+        if (!user.getUnlockedKits().contains(kit.getName())) {
+            if (user.getCredits() < kit.getPrice()) {
+                player.sendMessage(CC.translate("&cNot enough credits!"));
+            } else {
+                user.getUnlockedKits().add(kit.getName());
+                user.setCredits(user.getCredits() - kit.getPrice());
+                player.sendMessage(CC.translate("&eYou have purchased the &d" + kit.getName() + "&e kit."));
+            }
+
             return;
         }
 
