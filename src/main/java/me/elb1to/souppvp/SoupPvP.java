@@ -43,7 +43,6 @@ public final class SoupPvP extends JavaPlugin {
 		this.loadManagers();
 		crc.loadListeners("me.elb1to.souppvp.listeners");
 		crc.loadCommands("me.elb1to.souppvp.commands");
-        this.getServer().getScheduler().runTaskTimerAsynchronously(this, new MenuUpdateTask(), 5L, 5L);
 
 		new BoardManager(new ServerScoreboard(), 20);
 	}
