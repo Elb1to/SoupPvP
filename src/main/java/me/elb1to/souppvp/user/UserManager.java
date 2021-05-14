@@ -21,20 +21,10 @@ public class UserManager {
 	}
 
 	public User getByUuid(UUID uuid) {
-		if (users.containsKey(uuid)) {
-			return users.get(uuid);
-		}
-
-		return new User(uuid);
+        return user.getOrDefault(uuid, new User(uuid));
 	}
 
 	public User getByPlayer(Player player) {
-		User user = users.get(player.getUniqueId());
-
-		if (user == null) {
-			user = new User(player.getUniqueId());
-		}
-
-		return user;
+        return getByUuid(player.getUniqueId());
 	}
 }
