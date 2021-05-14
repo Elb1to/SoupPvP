@@ -14,16 +14,10 @@ import java.util.ArrayList;
 @Getter
 public class KitManager {
 
-	private final ArrayList<Kit> kits = new ArrayList<>();
+	private final List<Kit> kits = new ArrayList<>();
 
 	public Kit getKitByName(String name) {
-		for (Kit kit : kits) {
-			if (name.equals(kit.getName())) {
-				return kit;
-			}
-		}
-
-		return null;
+        return kits.stream().filter(kit -> kit.getName().equals(kit.getName())).findFirst().orElse(null);
 	}
 
 	public void loadKits() {
