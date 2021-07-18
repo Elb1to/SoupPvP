@@ -2,6 +2,7 @@ package me.elb1to.souppvp;
 
 import lombok.Getter;
 import me.elb1to.souppvp.controller.ClassRegistrationController;
+import me.elb1to.souppvp.controller.SpawnController;
 import me.elb1to.souppvp.database.MongoSrv;
 import me.elb1to.souppvp.kit.KitManager;
 import me.elb1to.souppvp.layout.ServerScoreboard;
@@ -26,6 +27,7 @@ public final class SoupPvP extends JavaPlugin {
 
 	private KitManager kitManager;
 	private UserManager userManager;
+	private SpawnController spawnController;
 
 	@Override
 	public void onEnable() {
@@ -54,5 +56,6 @@ public final class SoupPvP extends JavaPlugin {
 	private void loadManagers() {
 		this.kitManager = new KitManager();
 		this.userManager = new UserManager();
+		this.spawnController = new SpawnController();
 	}
 }
