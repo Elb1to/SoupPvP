@@ -71,6 +71,11 @@ public class GameListener implements Listener {
             kUser.setCredits(kUser.getCredits() + 10);
 
             kUser.setKills(kUser.getKills() + 1);
+            kUser.setCurrentKillstreak(kUser.getCurrentKillstreak() + 1);
+            dUser.setCurrentKillstreak(0);
+            if (kUser.getCurrentKillstreak() > kUser.getHighestKillstreak()) {
+                kUser.setHighestKillstreak(kUser.getCurrentKillstreak());
+            }
             dUser.setDeaths(dUser.getDeaths() + 1);
         } else {
             event.getEntity().sendMessage(CC.translate("&cYou have died."));
