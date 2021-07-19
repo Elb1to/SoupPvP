@@ -1,6 +1,8 @@
 package me.elb1to.souppvp.utils;
 
 import me.elb1to.souppvp.SoupPvP;
+import me.elb1to.souppvp.user.User;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -57,5 +59,24 @@ public class PlayerUtil {
         player.getInventory().setItem(8, EVENT_HOSTING);
 
         player.updateInventory();
+    }
+
+    public static void sendStats(Player player, User user) {
+        final String[] stats = new String[]{
+            "&7&m-----------------------------------------------------",
+            "&a" + Bukkit.getPlayer(user.getUniqueId()).getName(),
+            "&e Kills: &a" + user.getKills(),
+            "&e Deaths: &c" + user.getDeaths(),
+            "&e KD: &6" + (double) (user.getKills() / user.getDeaths()),
+            "&e Killstreak: &6" + user.getCurrentKillstreak(),
+            "&e Highest Killstreak: &6" + user.getHighestKillstreak(),
+            "&e Credits: &a" + user.getCredits(),
+            "&e Bounty: &c" + user.getBounty(),
+            "&7&m-----------------------------------------------------"
+        };
+
+        for (String msg : stats) {
+            player.sendMessage(CC.translate(msg));
+        }
     }
 }
