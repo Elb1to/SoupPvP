@@ -42,8 +42,8 @@ public class BoardEntry {
 
     public void send(int position) {
         if (this.text.length() > 16) {
-            String suffix, prefix;
-            prefix = this.text.substring(0, 16);
+            String suffix;
+            String prefix = this.text.substring(0, 16);
 
             if (prefix.charAt(15) == '§') {
                 prefix = prefix.substring(0, 15);
