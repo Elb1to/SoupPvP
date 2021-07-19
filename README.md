@@ -1,4 +1,4 @@
-# SoupPvP
+# SoupPvP [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3507936ade234ae7bb280eae37ca04ce)](https://app.codacy.com/gh/Elb1to/SoupPvP?utm_source=github.com&utm_medium=referral&utm_content=Elb1to/SoupPvP&utm_campaign=Badge_Grade_Settings)
  Lunar Network SoupPvP gamemode replica
  
 ## Disclaimer
