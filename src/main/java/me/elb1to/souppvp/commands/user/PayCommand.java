@@ -34,6 +34,10 @@ public class PayCommand extends BaseCommand {
             player.sendMessage(translate("&cThere are no players named '" + args[0] + "' online."));
             return;
         }
+        if (target == player) {
+            player.sendMessage(translate("&cYou cannot send money to yourself!"));
+            return;
+        }
 
         User targetUser = SoupPvP.getInstance().getUserManager().getByUuid(target.getUniqueId());
         if (targetUser == null) {
@@ -41,12 +45,22 @@ public class PayCommand extends BaseCommand {
             return;
         }
 
+        int creditsSent = Integer.parseInt(args[1]);
+        if (creditsSent <= 0) {
+            player.sendMessage(translate("&cYou can't send that amount of credits."));
+            return;
+        }
+
         User user = this.plugin.getUserManager().getByUuid(player.getUniqueId());
+        if (user.getCredits() < creditsSent) {
+            player.sendMessage(translate("&cYou don't have enough credits to send."));
+            return;
+        }
 
-        user.setCredits(user.getCredits() - Integer.parseInt(args[1]));
-        targetUser.setCredits(targetUser.getCredits() + Integer.parseInt(args[1]));
+        user.setCredits(user.getCredits() - creditsSent);
+        targetUser.setCredits(targetUser.getCredits() + creditsSent);
 
-        String credits = (Integer.parseInt(args[1]) > 1 ? "credits" : "credit");
+        String credits = (creditsSent > 1 ? "credits" : "credit");
         player.sendMessage(translate("&eYou sent &d" + args[1] + "&e " + credits + " to &d" + target.getName() + "&e."));
         target.sendMessage(translate("&d" + player.getName() + "&e sent you &d" + args[1] + "&e " + credits + "."));
     }
