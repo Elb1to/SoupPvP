@@ -1,14 +1,10 @@
 package me.elb1to.souppvp.commands.admin.debug;
 
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.controller.SpawnController;
-import me.elb1to.souppvp.utils.CC;
 import me.elb1to.souppvp.utils.command.BaseCommand;
 import me.elb1to.souppvp.utils.command.Command;
 import me.elb1to.souppvp.utils.command.CommandArgs;
 import me.elb1to.souppvp.utils.cuboid.CustomLocation;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import static me.elb1to.souppvp.utils.CC.translate;

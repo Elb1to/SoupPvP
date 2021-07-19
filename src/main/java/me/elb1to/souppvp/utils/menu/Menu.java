@@ -97,7 +97,6 @@ public abstract class Menu {
             player.openInventory(inventory);
         }
 
-        this.onOpen(player);
         this.setClosedByMenu(false);
         if (autoUpdate && task == null) {
             task = SoupPvP.getInstance().getServer().getScheduler().runTaskTimer(SoupPvP.getInstance(), () -> this.openMenu(player), 0, 20L);
@@ -127,10 +126,6 @@ public abstract class Menu {
     public abstract String getTitle(Player player);
 
     public abstract Map<Integer, Button> getButtons(Player player);
-
-    public void onOpen(Player player) {
-
-    }
 
     public void onClose(Player player) {
         if (task != null) {

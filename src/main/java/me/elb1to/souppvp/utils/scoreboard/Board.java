@@ -16,22 +16,31 @@ import java.util.*;
  */
 @Getter
 public class Board {
-    private List<BoardEntry> entries = new ArrayList<>();
 
+    private List<BoardEntry> entries = new ArrayList<>();
     private List<String> strings = new ArrayList<>();
 
     private Scoreboard scoreboard;
-
     private Objective objective;
 
     private UUID id;
-
     private BoardManager board;
 
     public Board(Player player, BoardManager board) {
         this.id = player.getUniqueId();
         this.board = board;
         setUp(player);
+    }
+
+    private static String getRandomColor() {
+        Random random = new Random();
+        return colors().get(random.nextInt(colors().size() - 1)).toString();
+    }
+
+    private static List<ChatColor> colors() {
+        List<ChatColor> chatColors = new ArrayList<>();
+        Arrays.stream(ChatColor.values()).filter(ChatColor::isColor).forEach(chatColors::add);
+        return chatColors;
     }
 
     public void setUp(Player player) {
@@ -46,31 +55,20 @@ public class Board {
         player.setScoreboard(this.scoreboard);
     }
 
-    String getUniqueString() {
+    public String getUniqueString() {
         String string = getRandomColor();
-        while (this.strings.contains(string))
-            string = string + getRandomColor();
-        if (string.length() > 16)
+        while (this.strings.contains(string)) string = string + getRandomColor();
+        if (string.length() > 16) {
             return getUniqueString();
+        }
+
         this.strings.add(string);
         return string;
     }
 
-    BoardEntry getEntryAtPosition(int position) {
-        if (position >= this.entries.size())
-            return null;
+    public BoardEntry getEntryAtPosition(int position) {
+        if (position >= this.entries.size()) return null;
         return this.entries.get(position);
-    }
-
-    private static String getRandomColor() {
-        Random random = new Random();
-        return colors().get(random.nextInt(colors().size() - 1)).toString();
-    }
-
-    private static List<ChatColor> colors(){
-        List<ChatColor> chatColors = new ArrayList<>();
-        Arrays.stream(ChatColor.values()).filter(ChatColor::isColor).forEach(cc -> chatColors.add(cc));
-        return chatColors;
     }
 }
 

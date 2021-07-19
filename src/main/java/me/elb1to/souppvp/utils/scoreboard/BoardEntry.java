@@ -15,11 +15,8 @@ import org.bukkit.scoreboard.Team;
 public class BoardEntry {
 
     private Board board;
-
     private String text;
-
     private String string;
-
     private Team team;
 
     public BoardEntry(Board board, String text) {
@@ -33,22 +30,21 @@ public class BoardEntry {
         Scoreboard scoreboard = this.board.getScoreboard();
         if (scoreboard != null) {
             String name = this.string;
-            if (name.length() > 16)
-                name = name.substring(0, 16);
+            if (name.length() > 16) name = name.substring(0, 16);
+
             Team team = scoreboard.getTeam(name);
-            if (team == null)
-                team = scoreboard.registerNewTeam(name);
-            if (!team.getEntries().contains(this.string))
-                team.addEntry(this.string);
-            if (!this.board.getEntries().contains(this))
-                this.board.getEntries().add(this);
+            if (team == null) team = scoreboard.registerNewTeam(name);
+            if (!team.getEntries().contains(this.string)) team.addEntry(this.string);
+            if (!this.board.getEntries().contains(this)) this.board.getEntries().add(this);
             this.team = team;
         }
     }
 
     public void send(int position) {
         if (this.text.length() > 16) {
-            String suffix, prefix = this.text.substring(0, 16);
+            String suffix, prefix;
+            prefix = this.text.substring(0, 16);
+
             if (prefix.charAt(15) == '§') {
                 prefix = prefix.substring(0, 15);
                 suffix = this.text.substring(15);
@@ -60,14 +56,15 @@ public class BoardEntry {
             } else {
                 suffix = ChatColor.getLastColors(prefix) + this.text.substring(16);
             }
-            if (suffix.length() > 16)
-                suffix = suffix.substring(0, 16);
+
+            if (suffix.length() > 16) suffix = suffix.substring(0, 16);
             this.team.setPrefix(prefix);
             this.team.setSuffix(suffix);
         } else {
             this.team.setPrefix(this.text);
             this.team.setSuffix("");
         }
+
         Score score = this.board.getObjective().getScore(this.string);
         score.setScore(position);
     }

@@ -89,10 +89,8 @@ public class ButtonListener implements Listener {
             for (ItemStack it : player.getInventory().getContents()) {
                 if (it != null) {
                     ItemMeta meta = it.getItemMeta();
-                    if (meta != null && meta.hasDisplayName()) {
-                        if (meta.getDisplayName().contains("§b§c§d§e")) {
-                            player.getInventory().remove(it);
-                        }
+                    if (meta != null && meta.hasDisplayName() && meta.getDisplayName().contains("§b§c§d§e")) {
+                        player.getInventory().remove(it);
                     }
                 }
             }
