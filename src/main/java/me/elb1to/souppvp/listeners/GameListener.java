@@ -3,7 +3,7 @@ package me.elb1to.souppvp.listeners;
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.ui.kit.KitSelectionMenu;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -51,7 +51,7 @@ public class GameListener implements Listener {
         } else if (event.getItem().equals(PREVIOUS_KIT)) {
             player.sendMessage("Choose previous kit");
         } else if (event.getItem().getType().equals(Material.SKULL_ITEM)) {
-            player.sendMessage("Open Stats Menu");
+            player.performCommand("stats");
         }
     }
 
@@ -60,14 +60,14 @@ public class GameListener implements Listener {
         event.setDeathMessage(null);
 
         Player player = event.getEntity();
-        Bukkit.getScheduler().runTaskLater(SoupPvP.getInstance(), () -> player.spigot().respawn(), 1L);
+        event.getDrops().removeIf(item -> item.getType() != Material.MUSHROOM_SOUP);
 
         if (event.getEntity().getKiller() != null) {
             User kUser = this.plugin.getUserManager().getByUuid(event.getEntity().getKiller().getUniqueId());
             User dUser = this.plugin.getUserManager().getByUuid(player.getUniqueId());
 
-            event.getEntity().sendMessage(CC.translate("&cYou have been killed by &a" + event.getEntity().getKiller().getName() + "&c."));
-            event.getEntity().getKiller().sendMessage(CC.translate("&bYou have killed &a" + player.getName() + " &bfor &a" + 10 + " credits&b."));
+            event.getEntity().sendMessage(ColorHelper.translate("&cYou have been killed by &a" + event.getEntity().getKiller().getName() + "&c."));
+            event.getEntity().getKiller().sendMessage(ColorHelper.translate("&bYou have killed &a" + player.getName() + " &bfor &a" + 10 + " credits&b."));
             kUser.setCredits(kUser.getCredits() + 10);
 
             kUser.setKills(kUser.getKills() + 1);
@@ -78,14 +78,18 @@ public class GameListener implements Listener {
             }
             dUser.setDeaths(dUser.getDeaths() + 1);
         } else {
-            event.getEntity().sendMessage(CC.translate("&cYou have died."));
+            event.getEntity().sendMessage(ColorHelper.translate("&cYou have died."));
 
             User dUser = this.plugin.getUserManager().getByUuid(player.getUniqueId());
             dUser.setDeaths(dUser.getDeaths() + 1);
         }
 
-        resetPlayer(player);
-        resetHotbar(player);
+        Bukkit.getScheduler().runTaskLater(SoupPvP.getInstance(), () -> {
+            player.spigot().respawn();
+
+            resetPlayer(player);
+            resetHotbar(player);
+        }, 1L);
     }
 
     @EventHandler
