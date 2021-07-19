@@ -21,7 +21,7 @@ public class UserAdminCreditsCommand extends BaseCommand {
         Player player = command.getPlayer();
         String[] args = command.getArgs();
 
-        if (args.length > 2) {
+        if (args.length < 2) {
             player.sendMessage(ColorHelper.translate("&cUsage: /useradmin setcredits <player> <credits>"));
             return;
         }
