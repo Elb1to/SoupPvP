@@ -21,8 +21,7 @@ import java.util.Collections;
 @Getter
 public class MongoSrv {
 
-	@Getter private static MongoSrv instance;
-
+	private final MongoSrv instance;
 	private final SoupPvP plugin = SoupPvP.getInstance();
 
 	private MongoClient client;

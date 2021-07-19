@@ -3,7 +3,7 @@ package me.elb1to.souppvp.user;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.UpdateOptions;
 import lombok.Getter;
-import me.elb1to.souppvp.database.MongoSrv;
+import me.elb1to.souppvp.SoupPvP;
 import org.bson.Document;
 
 import java.util.*;
@@ -16,6 +16,7 @@ import java.util.*;
 public class UserManager {
 
     @Getter private final Map<UUID, User> users = new HashMap<>();
+    private final SoupPvP plugin = SoupPvP.getInstance();
 
     public User getOrCreate(UUID uuid) {
         return users.computeIfAbsent(uuid, User::new);
@@ -30,7 +31,7 @@ public class UserManager {
     }
 
     public void loadUser(User user) {
-        Document document = MongoSrv.getInstance().getUsers().find(Filters.eq("uniqueId", user.getUniqueId().toString())).first();
+        Document document = this.plugin.getMongoSrv().getUsers().find(Filters.eq("uniqueId", user.getUniqueId().toString())).first();
         if (document != null) {
             user.setCurrentKitName(document.getString("currentKitName"));
             user.setUnlockedKits((List<String>) document.get("unlockedKits"));
@@ -60,7 +61,7 @@ public class UserManager {
         document.put("currentKillstreak", user.getCurrentKillstreak());
         document.put("highestKillstreak", user.getHighestKillstreak());
 
-        MongoSrv.getInstance().getUsers().replaceOne(Filters.eq("uniqueId", user.getUniqueId().toString()), document, new UpdateOptions().upsert(true));
+        this.plugin.getMongoSrv().getUsers().replaceOne(Filters.eq("uniqueId", user.getUniqueId().toString()), document, new UpdateOptions().upsert(true));
     }
 
     public void deleteUser(UUID uniqueId) {

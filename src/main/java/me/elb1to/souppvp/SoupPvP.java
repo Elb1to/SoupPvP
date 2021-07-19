@@ -28,6 +28,7 @@ public final class SoupPvP extends JavaPlugin {
 	private final CommandFramework commandFramework = new CommandFramework(this);
 	private final ClassRegistrationController crc = new ClassRegistrationController();
 
+	private MongoSrv mongoSrv;
 	private KitManager kitManager;
 	private UserManager userManager;
 	private SpawnController spawnController;
@@ -41,8 +42,6 @@ public final class SoupPvP extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(CC.translate("&bSoupPvP - Lunar.GG Replica &8- &fv" + getDescription().getVersion()));
 		Bukkit.getConsoleSender().sendMessage(CC.translate("&7Made on &bFrozed Club Development &7by &bElb1to"));
 		Bukkit.getConsoleSender().sendMessage("------------------------------------------------");
-
-		new MongoSrv();
 
 		this.loadManagers();
 		crc.loadListeners("me.elb1to.souppvp.listeners");
@@ -62,9 +61,12 @@ public final class SoupPvP extends JavaPlugin {
                 entity.remove();
             }
         }
+
+        this.mongoSrv.disconnect();
     }
 
 	private void loadManagers() {
+	    this.mongoSrv = new MongoSrv();
 		this.kitManager = new KitManager();
 		this.userManager = new UserManager();
 		this.spawnController = new SpawnController();
