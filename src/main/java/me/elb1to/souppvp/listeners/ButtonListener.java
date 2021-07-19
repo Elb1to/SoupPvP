@@ -47,11 +47,9 @@ public class ButtonListener implements Listener {
 
                 if (Menu.currentlyOpenedMenus.containsKey(player.getName())) {
                     Menu newMenu = Menu.currentlyOpenedMenus.get(player.getName());
-                    if (newMenu == openMenu) {
-                        if (openMenu.isUpdateAfterClick()) {
-                            openMenu.setClosedByMenu(true);
-                            newMenu.openMenu(player);
-                        }
+                    if (newMenu == openMenu && openMenu.isUpdateAfterClick()) {
+                        openMenu.setClosedByMenu(true);
+                        newMenu.openMenu(player);
                     }
                 } else if (button.shouldUpdate(player, event.getSlot(), event.getClick())) {
                     openMenu.setClosedByMenu(true);
