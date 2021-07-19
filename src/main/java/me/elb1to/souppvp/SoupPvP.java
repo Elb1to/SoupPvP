@@ -6,11 +6,14 @@ import me.elb1to.souppvp.controller.SpawnController;
 import me.elb1to.souppvp.database.MongoSrv;
 import me.elb1to.souppvp.kit.KitManager;
 import me.elb1to.souppvp.layout.ServerScoreboard;
+import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.UserManager;
 import me.elb1to.souppvp.utils.CC;
 import me.elb1to.souppvp.utils.command.CommandFramework;
 import me.elb1to.souppvp.utils.scoreboard.BoardManager;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -48,10 +51,18 @@ public final class SoupPvP extends JavaPlugin {
 		new BoardManager(new ServerScoreboard(), 20);
 	}
 
-	@Override
-	public void onDisable() {
+    @Override
+    public void onDisable() {
+        for (User user : this.getUserManager().getAllUsers()) {
+            this.userManager.saveUser(user);
+        }
 
-	}
+        for (Entity entity : this.getServer().getWorld("world").getEntities()) {
+            if (entity.getType() == EntityType.DROPPED_ITEM) {
+                entity.remove();
+            }
+        }
+    }
 
 	private void loadManagers() {
 		this.kitManager = new KitManager();
