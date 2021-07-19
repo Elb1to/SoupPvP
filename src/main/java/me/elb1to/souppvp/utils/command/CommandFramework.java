@@ -1,7 +1,7 @@
 package me.elb1to.souppvp.utils.command;
 
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
@@ -64,11 +64,11 @@ public class CommandFramework implements CommandExecutor {
 				Object methodObject = commandMap.get(cmdLabel).getValue();
 				Command command = method.getAnnotation(Command.class);
 				if (!command.permission().equals("") && (!sender.hasPermission(command.permission()))) {
-					sender.sendMessage(CC.translate("&cYou don't have permissions to perform this."));
+					sender.sendMessage(ColorHelper.translate("&cYou don't have permissions to perform this."));
 					return true;
 				}
 				if (command.inGameOnly() && !(sender instanceof Player)) {
-					sender.sendMessage(CC.translate("&cThis command can only be executed in game."));
+					sender.sendMessage(ColorHelper.translate("&cThis command can only be executed in game."));
 					return true;
 				}
 

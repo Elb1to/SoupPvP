@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.List;
 
-import static me.elb1to.souppvp.utils.CC.translate;
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
 
 /**
  * Created by Elb1to

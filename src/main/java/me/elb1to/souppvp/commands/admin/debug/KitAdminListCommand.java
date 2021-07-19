@@ -2,7 +2,7 @@ package me.elb1to.souppvp.commands.admin.debug;
 
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.kit.Kit;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import me.elb1to.souppvp.utils.command.BaseCommand;
 import me.elb1to.souppvp.utils.command.Command;
 import me.elb1to.souppvp.utils.command.CommandArgs;
@@ -21,9 +21,9 @@ public class KitAdminListCommand extends BaseCommand {
     public void onCommand(CommandArgs command) {
         Player player = command.getPlayer();
 
-        player.sendMessage(CC.translate("&aTotal kits: " + SoupPvP.getInstance().getKitManager().getKits().size()));
+        player.sendMessage(ColorHelper.translate("&aTotal kits: " + SoupPvP.getInstance().getKitManager().getKits().size()));
         for (Kit kits : this.plugin.getKitManager().getKits()) {
-            player.sendMessage(CC.translate("&a * " + kits.getName()));
+            player.sendMessage(ColorHelper.translate("&a * " + kits.getName()));
         }
     }
 }

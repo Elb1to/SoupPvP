@@ -7,7 +7,7 @@ import me.elb1to.souppvp.utils.command.CommandArgs;
 import me.elb1to.souppvp.utils.cuboid.CustomLocation;
 import org.bukkit.entity.Player;
 
-import static me.elb1to.souppvp.utils.CC.translate;
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
 
 /**
  * Created by Elb1to

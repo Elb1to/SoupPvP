@@ -76,7 +76,7 @@ public class PlayerUtil {
         };
 
         for (String msg : stats) {
-            player.sendMessage(CC.translate(msg));
+            player.sendMessage(ColorHelper.translate(msg));
         }
     }
 }

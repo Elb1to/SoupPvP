@@ -8,7 +8,7 @@ import me.elb1to.souppvp.utils.command.CommandArgs;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import static me.elb1to.souppvp.utils.CC.translate;
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
 
 /**
  * Created by Elb1to

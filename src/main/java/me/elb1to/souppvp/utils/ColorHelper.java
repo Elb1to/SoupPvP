@@ -10,7 +10,7 @@ import java.util.List;
  * Project: SoupPvP
  * Date: 5/6/2021 @ 1:24 PM
  */
-public class CC {
+public class ColorHelper {
 
     public final static String MENU_BAR = ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH.toString() + "------------------------";
     public final static String CHAT_BAR = ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH.toString() + "-----------------------------------------------------";

@@ -7,7 +7,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 
@@ -55,11 +55,11 @@ public class MongoSrv {
 			this.users = this.mongoDatabase.getCollection("users");
 		} catch (Exception e) {
 			connected = false;
-			Bukkit.getConsoleSender().sendMessage(CC.translate("&b[SoupPvP] &cFailed to connect to MongoDB"));
+			Bukkit.getConsoleSender().sendMessage(ColorHelper.translate("&b[SoupPvP] &cFailed to connect to MongoDB"));
 			e.printStackTrace();
 
 			Bukkit.getServer().getPluginManager().disablePlugin(this.plugin);
-			Bukkit.getConsoleSender().sendMessage(CC.translate("&b[SoupPvP] &cDisabling plugin..."));
+			Bukkit.getConsoleSender().sendMessage(ColorHelper.translate("&b[SoupPvP] &cDisabling plugin..."));
 		}
 	}
 

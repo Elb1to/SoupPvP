@@ -1,7 +1,7 @@
 package me.elb1to.souppvp.kit;
 
 import lombok.Getter;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -38,7 +38,7 @@ public abstract class Kit {
 		this.giveSoups(player);
 
 		player.updateInventory();
-        player.sendMessage(CC.translate("&eYou have chosen the &d" + this.getName() + "&e kit."));
+        player.sendMessage(ColorHelper.translate("&eYou have chosen the &d" + this.getName() + "&e kit."));
 	}
 
 	public abstract PotionEffect[] getPotionEffects();

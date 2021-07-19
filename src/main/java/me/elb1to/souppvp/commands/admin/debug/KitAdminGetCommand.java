@@ -1,7 +1,7 @@
 package me.elb1to.souppvp.commands.admin.debug;
 
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import me.elb1to.souppvp.utils.command.BaseCommand;
 import me.elb1to.souppvp.utils.command.Command;
 import me.elb1to.souppvp.utils.command.CommandArgs;
@@ -22,14 +22,14 @@ public class KitAdminGetCommand extends BaseCommand {
         String[] args = command.getArgs();
 
         if (args.length == 0) {
-            player.sendMessage(CC.translate("&cUsage: /kitadmin get <kitName>"));
+            player.sendMessage(ColorHelper.translate("&cUsage: /kitadmin get <kitName>"));
             return;
         }
 
         if (this.plugin.getKitManager().getKitByName(args[0]) != null) {
             this.plugin.getKitManager().getKitByName(args[0]).equipKit(player);
         } else {
-            player.sendMessage(CC.translate("&cThis kit doesnt exist"));
+            player.sendMessage(ColorHelper.translate("&cThis kit doesnt exist"));
         }
     }
 }

@@ -2,7 +2,7 @@ package me.elb1to.souppvp.commands.user;
 
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.user.User;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import me.elb1to.souppvp.utils.PlayerUtil;
 import me.elb1to.souppvp.utils.command.BaseCommand;
 import me.elb1to.souppvp.utils.command.Command;
@@ -31,13 +31,13 @@ public class StatsCommand extends BaseCommand {
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            player.sendMessage(CC.translate("&cThere are no players named '" + args[0] + "' online."));
+            player.sendMessage(ColorHelper.translate("&cThere are no players named '" + args[0] + "' online."));
             return;
         }
 
         User targetUser = SoupPvP.getInstance().getUserManager().getByUuid(target.getUniqueId());
         if (targetUser == null) {
-            player.sendMessage(CC.translate("&c" + target.getName() + " doesn't have data stored."));
+            player.sendMessage(ColorHelper.translate("&c" + target.getName() + " doesn't have data stored."));
             return;
         }
 

@@ -2,7 +2,7 @@ package me.elb1to.souppvp.listeners;
 
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.user.User;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,9 +27,9 @@ public class UserListener implements Listener {
         Player player = Bukkit.getPlayer(event.getUniqueId());
         if (player != null && player.isOnline()) {
             event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
-            event.setKickMessage(CC.translate("&cYou tried to login too quickly after disconnecting.\n&cTry again in a few seconds."));
+            event.setKickMessage(ColorHelper.translate("&cYou tried to login too quickly after disconnecting.\n&cTry again in a few seconds."));
 
-            this.plugin.getServer().getScheduler().runTask(this.plugin, () -> player.kickPlayer(CC.translate("&cDuplicate login kick")));
+            this.plugin.getServer().getScheduler().runTask(this.plugin, () -> player.kickPlayer(ColorHelper.translate("&cDuplicate login kick")));
             return;
         }
 

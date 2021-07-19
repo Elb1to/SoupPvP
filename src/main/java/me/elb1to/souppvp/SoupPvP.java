@@ -8,7 +8,7 @@ import me.elb1to.souppvp.kit.KitManager;
 import me.elb1to.souppvp.layout.ServerScoreboard;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.UserManager;
-import me.elb1to.souppvp.utils.CC;
+import me.elb1to.souppvp.utils.ColorHelper;
 import me.elb1to.souppvp.utils.command.CommandFramework;
 import me.elb1to.souppvp.utils.scoreboard.BoardManager;
 import org.bukkit.Bukkit;
@@ -40,8 +40,8 @@ public final class SoupPvP extends JavaPlugin {
 		this.saveDefaultConfig();
 
 		Bukkit.getConsoleSender().sendMessage("------------------------------------------------");
-		Bukkit.getConsoleSender().sendMessage(CC.translate("&bSoupPvP - Lunar.GG Replica &8- &fv" + getDescription().getVersion()));
-		Bukkit.getConsoleSender().sendMessage(CC.translate("&7Made on &bFrozed Club Development &7by &bElb1to"));
+		Bukkit.getConsoleSender().sendMessage(ColorHelper.translate("&bSoupPvP - Lunar.GG Replica &8- &fv" + getDescription().getVersion()));
+		Bukkit.getConsoleSender().sendMessage(ColorHelper.translate("&7Made on &bFrozed Club Development &7by &bElb1to"));
 		Bukkit.getConsoleSender().sendMessage("------------------------------------------------");
 
 		this.loadManagers();
