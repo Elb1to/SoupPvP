@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -93,7 +94,7 @@ public class GameListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerDamage(EntityDamageByEntityEvent event) {
+    public void onPvP(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player)) {
             return;
         }
@@ -102,6 +103,15 @@ public class GameListener implements Listener {
         Player attacker = (Player) event.getDamager();
 
         if (inCuboid(victim) && inCuboid(attacker) || !inCuboid(victim) && inCuboid(attacker) || inCuboid(victim) && !inCuboid(attacker)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDamage(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof Player)) return;
+
+        if (inCuboid((Player) event.getEntity())) {
             event.setCancelled(true);
         }
     }
