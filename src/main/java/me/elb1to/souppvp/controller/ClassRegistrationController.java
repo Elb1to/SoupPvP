@@ -52,13 +52,15 @@ public class ClassRegistrationController {
 		Collection<Class<?>> classes = new ArrayList<>();
 		CodeSource codeSource = SoupPvP.getInstance().getClass().getProtectionDomain().getCodeSource();
 		URL resource = codeSource.getLocation();
+
 		String relPath = packageName.replace('.', '/');
 		String resPath = resource.getPath().replace("%20", " ");
 		String jarPath = resPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+
 		try {
 			jarFile = new JarFile(jarPath);
 		} catch (IOException e) {
-			throw new RuntimeException("Unexpected IOException reading JAR File '" + jarPath + "'", e);
+			throw new IllegalStateException("Unexpected IOException reading JAR File '" + jarPath + "'", e);
 		}
 
 		Enumeration<JarEntry> entries = jarFile.entries();

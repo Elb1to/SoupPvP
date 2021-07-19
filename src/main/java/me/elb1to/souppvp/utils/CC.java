@@ -13,6 +13,7 @@ import java.util.List;
 public class CC {
 
     public final static String MENU_BAR = ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH.toString() + "------------------------";
+    public final static String CHAT_BAR = ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH.toString() + "-----------------------------------------------------";
 
 	public static String translate(String message) {
 		return ChatColor.translateAlternateColorCodes('&', message);

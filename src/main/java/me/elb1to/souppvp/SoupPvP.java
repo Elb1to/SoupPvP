@@ -25,6 +25,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class SoupPvP extends JavaPlugin {
 
 	@Getter private static SoupPvP instance;
+
 	private final CommandFramework commandFramework = new CommandFramework(this);
 	private final ClassRegistrationController crc = new ClassRegistrationController();
 
