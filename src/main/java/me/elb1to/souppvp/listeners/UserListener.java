@@ -34,7 +34,7 @@ public class UserListener implements Listener {
         }
 
         User user = this.plugin.getUserManager().getOrCreate(event.getUniqueId());
-        user.save();
+        this.plugin.getUserManager().saveUser(user);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -47,7 +47,7 @@ public class UserListener implements Listener {
         }
 
         if (!user.isLoaded()) {
-            user.save();
+            this.plugin.getUserManager().saveUser(user);
             event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
             event.setKickMessage("§cAn error has ocurred while loading your profile. Please reconnect.");
         }
@@ -56,7 +56,7 @@ public class UserListener implements Listener {
     private void handledSaveDate(Player player) {
         User user = this.plugin.getUserManager().getOrCreate(player.getUniqueId());
         if (user != null) {
-            user.delete();
+            this.plugin.getUserManager().deleteUser(player.getUniqueId());
         }
     }
 

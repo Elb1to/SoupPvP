@@ -1,11 +1,12 @@
 package me.elb1to.souppvp.user;
 
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
 import lombok.Getter;
-import org.bukkit.entity.Player;
+import me.elb1to.souppvp.database.MongoSrv;
+import org.bson.Document;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by Elb1to
@@ -14,13 +15,56 @@ import java.util.UUID;
  */
 public class UserManager {
 
-	@Getter private final Map<UUID, User> users = new HashMap<>();
+    @Getter private final Map<UUID, User> users = new HashMap<>();
 
-	public User getOrCreate(UUID uuid) {
-		return users.computeIfAbsent(uuid, User::new);
-	}
+    public User getOrCreate(UUID uuid) {
+        return users.computeIfAbsent(uuid, User::new);
+    }
 
-	public User getByUuid(UUID uuid) {
-        return users.getOrDefault(uuid,new User(uuid));
-	}
+    public User getByUuid(UUID uuid) {
+        return users.getOrDefault(uuid, new User(uuid));
+    }
+
+    public Collection<User> getAllUsers() {
+        return this.users.values();
+    }
+
+    public void loadUser(User user) {
+        Document document = MongoSrv.getInstance().getUsers().find(Filters.eq("uniqueId", user.getUniqueId().toString())).first();
+        if (document != null) {
+            user.setCurrentKitName(document.getString("currentKitName"));
+            user.setUnlockedKits((List<String>) document.get("unlockedKits"));
+
+            user.setKills(document.getInteger("kills"));
+            user.setDeaths(document.getInteger("deaths"));
+            user.setBounty(document.getInteger("bounty"));
+            user.setCredits(document.getInteger("credits"));
+            user.setCurrentKillstreak(document.getInteger("currentKillstreak"));
+            user.setHighestKillstreak(document.getInteger("highestKillstreak"));
+        }
+
+        user.setLoaded(true);
+    }
+
+    public void saveUser(User user) {
+        Document document = new Document();
+        document.put("uniqueId", user.getUniqueId().toString());
+
+        document.put("currentKitName", user.getCurrentKitName());
+        document.put("unlockedKits", user.getUnlockedKits());
+
+        document.put("kills", user.getKills());
+        document.put("deaths", user.getDeaths());
+        document.put("bounty", user.getBounty());
+        document.put("credits", user.getCredits());
+        document.put("currentKillstreak", user.getCurrentKillstreak());
+        document.put("highestKillstreak", user.getHighestKillstreak());
+
+        MongoSrv.getInstance().getUsers().replaceOne(Filters.eq("uniqueId", user.getUniqueId().toString()), document, new UpdateOptions().upsert(true));
+    }
+
+    public void deleteUser(UUID uniqueId) {
+        this.saveUser(this.getByUuid(uniqueId));
+        this.getUsers().remove(uniqueId);
+    }
 }
