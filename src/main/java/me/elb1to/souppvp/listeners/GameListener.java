@@ -4,7 +4,6 @@ import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.ui.kit.KitSelectionMenu;
 import me.elb1to.souppvp.utils.ColorHelper;
-import me.elb1to.souppvp.utils.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
