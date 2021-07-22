@@ -55,7 +55,7 @@ public class GameListener implements Listener {
         } else if (event.getItem().equals(PREVIOUS_KIT)) {
             SoupPvP.getInstance().getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
         } else if (event.getItem().getType().equals(Material.SKULL_ITEM)) {
-            PlayerUtil.sendStats(player, user);
+            sendStats(player, user);
         }
     }
 
