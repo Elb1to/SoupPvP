@@ -38,10 +38,12 @@ public class GameListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-
         if (event.getItem() == null) {
             return;
         }
+
+        User user = this.plugin.getUserManager().getByUuid(player.getUniqueId());
+        if (user == null) return;
 
         if (event.getItem().equals(KIT_SELECTOR)) {
             new KitSelectionMenu().openMenu(player);
@@ -50,9 +52,9 @@ public class GameListener implements Listener {
         } else if (event.getItem().equals(PLAYER_PERKS)) {
             player.sendMessage("Open Perks Menu");
         } else if (event.getItem().equals(PREVIOUS_KIT)) {
-            player.sendMessage("Choose previous kit");
+            SoupPvP.getInstance().getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
         } else if (event.getItem().getType().equals(Material.SKULL_ITEM)) {
-            player.performCommand("stats");
+            sendStats(player, user);
         }
     }
 
@@ -68,8 +70,12 @@ public class GameListener implements Listener {
             User dUser = this.plugin.getUserManager().getByUuid(player.getUniqueId());
 
             event.getEntity().sendMessage(ColorHelper.translate("&cYou have been killed by &a" + event.getEntity().getKiller().getName() + "&c."));
-            event.getEntity().getKiller().sendMessage(ColorHelper.translate("&bYou have killed &a" + player.getName() + " &bfor &a" + 10 + " credits&b."));
-            kUser.setCredits(kUser.getCredits() + 10);
+            event.getEntity().getKiller().sendMessage(ColorHelper.translate("&bYou have killed &a" + player.getName() + " &bfor &a" + (kUser.getCurrentKitName().equals("Pro") ? 20 : 10) + " credits&b."));
+            if (kUser.getCurrentKitName().equals("Pro")) {
+                kUser.setCredits(kUser.getCredits() + 20);
+            } else {
+                kUser.setCredits(kUser.getCredits() + 10);
+            }
 
             kUser.setKills(kUser.getKills() + 1);
             kUser.setCurrentKillstreak(kUser.getCurrentKillstreak() + 1);
