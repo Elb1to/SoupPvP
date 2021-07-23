@@ -1,7 +1,7 @@
-package me.elb1to.souppvp.kit.impl;
+package me.elb1to.souppvp.loadout.kit.impl;
 
-import me.elb1to.souppvp.kit.Ability;
-import me.elb1to.souppvp.kit.Kit;
+import me.elb1to.souppvp.loadout.ability.Ability;
+import me.elb1to.souppvp.loadout.kit.Kit;
 import me.elb1to.souppvp.utils.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
