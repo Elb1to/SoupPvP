@@ -1,7 +1,7 @@
 package me.elb1to.souppvp.commands.admin.debug;
 
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.kit.Kit;
+import me.elb1to.souppvp.loadout.kit.Kit;
 import me.elb1to.souppvp.utils.ColorHelper;
 import me.elb1to.souppvp.utils.command.BaseCommand;
 import me.elb1to.souppvp.utils.command.Command;
