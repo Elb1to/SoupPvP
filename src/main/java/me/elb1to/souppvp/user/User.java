@@ -22,7 +22,7 @@ public class User {
 
     private boolean loaded;
 
-    private String currentKitName = "Default";
+    private String currentKitName;
     private List<String> unlockedKits = new ArrayList<>();
 
     private int kills;
