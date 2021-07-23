@@ -1,7 +1,6 @@
 package me.elb1to.souppvp.loadout.ability;
 
 import lombok.Getter;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
