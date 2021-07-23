@@ -38,7 +38,7 @@ public class DefaultKit extends Kit {
 	}
 
 	@Override
-	public Ability getAbilityItem() {
+	public Ability getAbility() {
 		return null;
 	}
 

@@ -49,7 +49,7 @@ public class NinjaKit extends Kit {
     }
 
     @Override
-    public Ability getAbilityItem() {
+    public Ability getAbility() {
         return SoupPvP.getInstance().getAbilityManager().getAbilityByName("Shuriken");
     }
 

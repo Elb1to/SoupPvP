@@ -43,7 +43,7 @@ public class CopyCatKit extends Kit {
     }
 
     @Override
-    public Ability getAbilityItem() {
+    public Ability getAbility() {
         return null;
     }
 

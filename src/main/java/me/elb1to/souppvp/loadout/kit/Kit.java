@@ -36,7 +36,7 @@ public abstract class Kit {
 		Arrays.stream(this.getPotionEffects()).forEach(player::addPotionEffect);
 		player.getInventory().setArmorContents(this.getArmor());
 		player.getInventory().setItem(0, getSword());
-		if (getAbilityItem() != null) player.getInventory().setItem(1, getAbilityItem().getItem());
+		if (getAbility() != null) player.getInventory().setItem(1, getAbility().getItem());
 		this.giveSoups(player);
 
 		player.updateInventory();
@@ -47,7 +47,7 @@ public abstract class Kit {
 
 	public abstract ItemStack getSword();
 
-	public abstract Ability getAbilityItem();
+	public abstract Ability getAbility();
 
     public abstract PotionEffect[] getPotionEffects();
 

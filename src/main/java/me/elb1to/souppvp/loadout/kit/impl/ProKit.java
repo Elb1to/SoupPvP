@@ -37,7 +37,7 @@ public class ProKit extends Kit {
 	}
 
 	@Override
-	public Ability getAbilityItem() {
+	public Ability getAbility() {
 		return null;
 	}
 
