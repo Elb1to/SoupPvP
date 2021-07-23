@@ -1,11 +1,14 @@
 package me.elb1to.souppvp.listeners;
 
 import org.bukkit.GameMode;
+import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
@@ -43,6 +46,11 @@ public class ServerListener implements Listener {
 	}
 
 	@EventHandler
+    public void onExplosion(ExplosionPrimeEvent event) {
+	    event.setCancelled(true);
+    }
+
+	@EventHandler
 	public void onFoodConsumption(FoodLevelChangeEvent event) {
 		event.setCancelled(true);
 	}
@@ -54,6 +62,8 @@ public class ServerListener implements Listener {
 
 	@EventHandler
 	public void onMobSpawn(CreatureSpawnEvent event) {
-		event.setCancelled(true);
+	    if (event.getEntityType() != EntityType.ARMOR_STAND) {
+            event.setCancelled(true);
+        }
 	}
 }
