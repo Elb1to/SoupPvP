@@ -41,13 +41,13 @@ public abstract class Kit {
         player.sendMessage(ColorHelper.translate("&eYou have chosen the &d" + this.getName() + "&e kit."));
 	}
 
-	public abstract PotionEffect[] getPotionEffects();
-
 	public abstract ItemStack[] getArmor();
 
 	public abstract ItemStack getSword();
 
 	public abstract Ability getAbilityItem();
+
+    public abstract PotionEffect[] getPotionEffects();
 
 	private void giveSoups(Player player) {
 		final ItemStack soup = new ItemStack(Material.MUSHROOM_SOUP);
