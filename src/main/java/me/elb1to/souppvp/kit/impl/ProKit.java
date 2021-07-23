@@ -21,15 +21,15 @@ public class ProKit extends Kit {
         }, 250);
     }
 
-	@Override
-	public ItemStack[] getArmor() {
-		return new ItemStack[]{
-				new ItemStack(Material.IRON_HELMET),
-				new ItemStack(Material.IRON_CHESTPLATE),
-				new ItemStack(Material.IRON_LEGGINGS),
-				new ItemStack(Material.IRON_BOOTS),
-		};
-	}
+    @Override
+    public ItemStack[] getArmor() {
+        return new ItemStack[]{
+            new ItemStack(Material.IRON_BOOTS),
+            new ItemStack(Material.IRON_LEGGINGS),
+            new ItemStack(Material.IRON_CHESTPLATE),
+            new ItemStack(Material.IRON_HELMET)
+        };
+    }
 
 	@Override
 	public ItemStack getSword() {
