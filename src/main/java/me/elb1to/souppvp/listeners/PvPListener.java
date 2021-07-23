@@ -30,17 +30,14 @@ public class PvPListener implements Listener {
         event.getDrops().removeIf(item -> item.getType() != Material.MUSHROOM_SOUP);
 
         Player victim = event.getEntity().getPlayer();
-        Player killer = event.getEntity().getKiller();
-        if (killer == null) return;
-
         User victimUser = SoupPvP.getInstance().getUserManager().getByUuid(victim.getUniqueId());
-        User killerUser = SoupPvP.getInstance().getUserManager().getByUuid(killer.getUniqueId());
-
-        if (killerUser.getCurrentKitName().equals("CopyCat")) {
-            this.plugin.getKitManager().getKitByName(victimUser.getCurrentKitName()).equipKit(killer);
-        }
-
         if (event.getEntity().getKiller() != null) {
+            Player killer = event.getEntity().getKiller();
+            User killerUser = SoupPvP.getInstance().getUserManager().getByUuid(killer.getUniqueId());
+
+            if (killerUser.getCurrentKitName().equals("CopyCat")) {
+                this.plugin.getKitManager().getKitByName(victimUser.getCurrentKitName()).equipKit(killer);
+            }
             event.getEntity().sendMessage(ColorHelper.translate("&cYou have been killed by &a" + event.getEntity().getKiller().getName() + "&c."));
             event.getEntity().getKiller().sendMessage(ColorHelper.translate("&bYou have killed &a" + victim.getName() + " &bfor &a" + (killerUser.getCurrentKitName().equals("Pro") ? 20 : 10) + " credits&b."));
             if (killerUser.getCurrentKitName().equals("Pro")) {
