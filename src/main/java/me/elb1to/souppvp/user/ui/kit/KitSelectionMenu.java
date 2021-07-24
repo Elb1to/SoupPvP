@@ -1,7 +1,7 @@
 package me.elb1to.souppvp.user.ui.kit;
 
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.kit.Kit;
+import me.elb1to.souppvp.loadout.kit.Kit;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.ui.kit.selection.SelectKitButton;
 import me.elb1to.souppvp.utils.menu.Button;

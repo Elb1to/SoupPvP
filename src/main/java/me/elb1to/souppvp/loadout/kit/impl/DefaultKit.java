@@ -1,7 +1,7 @@
-package me.elb1to.souppvp.kit.impl;
+package me.elb1to.souppvp.loadout.kit.impl;
 
-import me.elb1to.souppvp.kit.Ability;
-import me.elb1to.souppvp.kit.Kit;
+import me.elb1to.souppvp.loadout.ability.Ability;
+import me.elb1to.souppvp.loadout.kit.Kit;
 import me.elb1to.souppvp.utils.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -24,11 +24,7 @@ public class DefaultKit extends Kit {
 
 	@Override
 	public ItemStack getSword() {
-		return new ItemBuilder(Material.DIAMOND_SWORD)
-				.enchantment(Enchantment.DAMAGE_ALL, 1)
-				.enchantment(Enchantment.DURABILITY, 3)
-				.build()
-				;
+		return new ItemBuilder(Material.DIAMOND_SWORD).enchantment(Enchantment.DAMAGE_ALL, 1).enchantment(Enchantment.DURABILITY, 3).build();
 	}
 
 	@Override
@@ -42,7 +38,7 @@ public class DefaultKit extends Kit {
 	}
 
 	@Override
-	public Ability getAbilityItem() {
+	public Ability getAbility() {
 		return null;
 	}
 
