@@ -1,7 +1,6 @@
 package me.elb1to.souppvp.listeners;
 
 import org.bukkit.GameMode;
-import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,49 +20,49 @@ import org.bukkit.event.player.PlayerQuitEvent;
  */
 public class ServerListener implements Listener {
 
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
-		event.setJoinMessage(null);
-	}
-
-	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent event) {
-		event.setQuitMessage(null);
-	}
-
-	@EventHandler
-	public void onBlockPlace(BlockPlaceEvent event) {
-		if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
-			event.setCancelled(true);
-		}
-	}
-
-	@EventHandler
-	public void onBlockBreak(BlockBreakEvent event) {
-		if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
-			event.setCancelled(true);
-		}
-	}
-
-	@EventHandler
-    public void onExplosion(ExplosionPrimeEvent event) {
-	    event.setCancelled(true);
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        event.setJoinMessage(null);
     }
 
-	@EventHandler
-	public void onFoodConsumption(FoodLevelChangeEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        event.setQuitMessage(null);
+    }
 
-	@EventHandler
-	public void onPortalEnter(PlayerPortalEvent event) {
-		event.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onMobSpawn(CreatureSpawnEvent event) {
-	    if (event.getEntityType() != EntityType.ARMOR_STAND) {
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+        if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
             event.setCancelled(true);
         }
-	}
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+        if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onExplosion(ExplosionPrimeEvent event) {
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onFoodConsumption(FoodLevelChangeEvent event) {
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPortalEnter(PlayerPortalEvent event) {
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onMobSpawn(CreatureSpawnEvent event) {
+        if (event.getEntityType() != EntityType.ARMOR_STAND) {
+            event.setCancelled(true);
+        }
+    }
 }
