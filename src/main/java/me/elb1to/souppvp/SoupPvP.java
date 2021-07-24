@@ -4,7 +4,8 @@ import lombok.Getter;
 import me.elb1to.souppvp.controller.ClassRegistrationController;
 import me.elb1to.souppvp.controller.SpawnController;
 import me.elb1to.souppvp.database.MongoSrv;
-import me.elb1to.souppvp.kit.KitManager;
+import me.elb1to.souppvp.loadout.ability.AbilityManager;
+import me.elb1to.souppvp.loadout.kit.KitManager;
 import me.elb1to.souppvp.layout.ServerScoreboard;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.UserManager;
@@ -32,6 +33,7 @@ public final class SoupPvP extends JavaPlugin {
 	private MongoSrv mongoSrv;
 	private KitManager kitManager;
 	private UserManager userManager;
+	private AbilityManager abilityManager;
 	private SpawnController spawnController;
 
 	@Override
@@ -70,6 +72,7 @@ public final class SoupPvP extends JavaPlugin {
 	    this.mongoSrv = new MongoSrv();
 		this.kitManager = new KitManager();
 		this.userManager = new UserManager();
+		this.abilityManager = new AbilityManager();
 		this.spawnController = new SpawnController();
 	}
 }

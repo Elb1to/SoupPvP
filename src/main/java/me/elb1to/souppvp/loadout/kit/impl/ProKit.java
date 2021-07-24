@@ -1,7 +1,7 @@
-package me.elb1to.souppvp.kit.impl;
+package me.elb1to.souppvp.loadout.kit.impl;
 
-import me.elb1to.souppvp.kit.Ability;
-import me.elb1to.souppvp.kit.Kit;
+import me.elb1to.souppvp.loadout.ability.Ability;
+import me.elb1to.souppvp.loadout.kit.Kit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -21,15 +21,15 @@ public class ProKit extends Kit {
         }, 250);
     }
 
-	@Override
-	public ItemStack[] getArmor() {
-		return new ItemStack[]{
-				new ItemStack(Material.IRON_HELMET),
-				new ItemStack(Material.IRON_CHESTPLATE),
-				new ItemStack(Material.IRON_LEGGINGS),
-				new ItemStack(Material.IRON_BOOTS),
-		};
-	}
+    @Override
+    public ItemStack[] getArmor() {
+        return new ItemStack[]{
+            new ItemStack(Material.IRON_BOOTS),
+            new ItemStack(Material.IRON_LEGGINGS),
+            new ItemStack(Material.IRON_CHESTPLATE),
+            new ItemStack(Material.IRON_HELMET)
+        };
+    }
 
 	@Override
 	public ItemStack getSword() {
@@ -37,7 +37,7 @@ public class ProKit extends Kit {
 	}
 
 	@Override
-	public Ability getAbilityItem() {
+	public Ability getAbility() {
 		return null;
 	}
 

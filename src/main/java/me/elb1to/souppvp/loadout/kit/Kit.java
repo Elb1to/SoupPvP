@@ -1,6 +1,7 @@
-package me.elb1to.souppvp.kit;
+package me.elb1to.souppvp.loadout.kit;
 
 import lombok.Getter;
+import me.elb1to.souppvp.loadout.ability.Ability;
 import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -35,19 +36,20 @@ public abstract class Kit {
 		Arrays.stream(this.getPotionEffects()).forEach(player::addPotionEffect);
 		player.getInventory().setArmorContents(this.getArmor());
 		player.getInventory().setItem(0, getSword());
+		if (getAbility() != null) player.getInventory().setItem(1, getAbility().getItem());
 		this.giveSoups(player);
 
 		player.updateInventory();
         player.sendMessage(ColorHelper.translate("&eYou have chosen the &d" + this.getName() + "&e kit."));
 	}
 
-	public abstract PotionEffect[] getPotionEffects();
-
 	public abstract ItemStack[] getArmor();
 
 	public abstract ItemStack getSword();
 
-	public abstract Ability getAbilityItem();
+	public abstract Ability getAbility();
+
+    public abstract PotionEffect[] getPotionEffects();
 
 	private void giveSoups(Player player) {
 		final ItemStack soup = new ItemStack(Material.MUSHROOM_SOUP);

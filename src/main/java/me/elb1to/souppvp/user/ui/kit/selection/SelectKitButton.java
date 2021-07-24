@@ -2,7 +2,7 @@ package me.elb1to.souppvp.user.ui.kit.selection;
 
 import lombok.AllArgsConstructor;
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.kit.Kit;
+import me.elb1to.souppvp.loadout.kit.Kit;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.utils.ColorHelper;
 import me.elb1to.souppvp.utils.ItemBuilder;
