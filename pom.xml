@@ -44,7 +44,7 @@
             <systemPath>${project.basedir}/libs/PaperSpigot-1.8.8-R0.1-SNAPSHOT.jar</systemPath>
         </dependency>
 
-        <!-- Lunar API -->
+        <!-- Lunar API | download at : https://anonfiles.com/Z5F2zd82uc/LunarClient-API_jar -->
         <dependency>
             <groupId>com.lunarclient</groupId>
             <artifactId>bukkitapi</artifactId>

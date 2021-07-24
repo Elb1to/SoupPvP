@@ -4,9 +4,10 @@ import lombok.Getter;
 import me.elb1to.souppvp.controller.ClassRegistrationController;
 import me.elb1to.souppvp.controller.SpawnController;
 import me.elb1to.souppvp.database.MongoSrv;
+import me.elb1to.souppvp.layout.ServerScoreboard;
+import me.elb1to.souppvp.listeners.combat.CombatManager;
 import me.elb1to.souppvp.loadout.ability.AbilityManager;
 import me.elb1to.souppvp.loadout.kit.KitManager;
-import me.elb1to.souppvp.layout.ServerScoreboard;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.UserManager;
 import me.elb1to.souppvp.utils.ColorHelper;
@@ -35,6 +36,7 @@ public final class SoupPvP extends JavaPlugin {
 	private UserManager userManager;
 	private AbilityManager abilityManager;
 	private SpawnController spawnController;
+	private CombatManager combatManager;
 
 	@Override
 	public void onEnable() {
@@ -47,6 +49,7 @@ public final class SoupPvP extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage("------------------------------------------------");
 
 		this.loadManagers();
+		combatManager.runTaskTimer(this, 0, 20);
 		crc.loadListeners("me.elb1to.souppvp.listeners");
 		crc.loadCommands("me.elb1to.souppvp.commands");
 
@@ -74,5 +77,6 @@ public final class SoupPvP extends JavaPlugin {
 		this.userManager = new UserManager();
 		this.abilityManager = new AbilityManager();
 		this.spawnController = new SpawnController();
+		this.combatManager = new CombatManager();
 	}
 }
