@@ -8,9 +8,8 @@ import me.elb1to.souppvp.utils.command.CommandArgs;
 import org.bukkit.entity.Player;
 
 /**
- * Created by Elb1to
- * Project: SoupPvP
- * Date: 5/6/2021 @ 9:57 PM
+ * Created by Infames
+ * Date: 24/07/2021 @ 19:45
  */
 public class CombatCommand extends BaseCommand {
 
