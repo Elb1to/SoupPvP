@@ -25,6 +25,8 @@ public class AbilityListener implements Listener {
         if (event.getAction().name().startsWith("RIGHT_")) {
             if (event.getItem().isSimilar(this.plugin.getAbilityManager().getAbilityByName("Shuriken").getItem())) {
                 this.plugin.getAbilityManager().getAbilityByName("Shuriken").getCallable().execute(player);
+            } else if (event.getItem().isSimilar(this.plugin.getAbilityManager().getAbilityByName("Phantom").getItem())) {
+                player.sendMessage("Do Phantom temp flight ability");
             }
         }
     }
