@@ -6,7 +6,7 @@ import me.elb1to.souppvp.utils.scoreboard.BoardAdapter;
 import me.elb1to.souppvp.utils.scoreboard.BoardStyle;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import static me.elb1to.souppvp.utils.ColorHelper.translate;
@@ -18,6 +18,8 @@ import static me.elb1to.souppvp.utils.ColorHelper.translate;
  */
 public class ServerScoreboard implements BoardAdapter {
 
+    private final SoupPvP plugin = SoupPvP.getInstance();
+
     @Override
     public String getTitle(Player player) {
         return translate("&b&lSoupPvP");
@@ -26,18 +28,23 @@ public class ServerScoreboard implements BoardAdapter {
     @Override
     public List<String> getLines(Player player) {
         User user = SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId());
+        List<String> strings = new ArrayList<>();
 
-        return Arrays.asList(
-            translate("&7&m----------------------"),
-            translate("Kills: &b" + user.getKills()),
-            translate("Killstreak: &b" + user.getCurrentKillstreak()),
-            translate("Deaths: &b" + user.getDeaths()),
-            translate("Credits: &b" + user.getCredits()),
-            translate(" "),
-            translate("&bfrozed.club"),
-            translate("&7&m----------------------")
-        );
+        strings.add(translate("&7&m----------------------"));
+        strings.add(translate("Kills: &b" + user.getKills()));
+        strings.add(translate("Killstreak: &b" + user.getCurrentKillstreak()));
+        strings.add(translate("Deaths: &b" + user.getDeaths()));
+        strings.add(translate("Credits: &b" + user.getCredits()));
+        if (plugin.getCombatManager().isCombat(player)) {
+        strings.add(translate("&cCombat Tag&7: &f" + plugin.getCombatManager().getCombatTime(player) + "s"));
+        }
+        strings.add(translate(" "));
+        strings.add(translate("&bfrozed.club"));
+        strings.add(translate("&7&m----------------------"));
+
+        return strings;
     }
+
 
     @Override
     public BoardStyle getBoardStyle(Player player) {
