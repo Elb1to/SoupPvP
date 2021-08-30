@@ -67,7 +67,7 @@ public class PlayerUtil {
             "&a" + Bukkit.getPlayer(user.getUniqueId()).getName(),
             "&e Kills: &a" + user.getKills(),
             "&e Deaths: &c" + user.getDeaths(),
-            "&e KD: &6" + Math.round(user.getKills() / user.getDeaths()),
+            "&e KD: &6" + (double) user.getKills() / user.getDeaths(),
             "&e Killstreak: &6" + user.getCurrentKillstreak(),
             "&e Highest Killstreak: &6" + user.getHighestKillstreak(),
             "&e Credits: &a" + user.getCredits(),
