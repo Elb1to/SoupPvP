@@ -1,5 +1,7 @@
 package me.elb1to.souppvp.listeners;
 
+import com.lunarclient.bukkitapi.LunarClientAPI;
+import com.lunarclient.bukkitapi.object.LCWaypoint;
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.ui.kit.KitSelectionMenu;
@@ -26,6 +28,8 @@ public class GameListener implements Listener {
 
         resetPlayer(player);
         resetHotbar(player);
+
+        LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("Spawn", SoupPvP.getInstance().getSpawnController().getSpawnLocation().toBukkitLocation(), -1, true, true));
     }
 
     @EventHandler
