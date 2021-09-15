@@ -5,6 +5,7 @@ import com.lunarclient.bukkitapi.object.LCWaypoint;
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.ui.kit.KitSelectionMenu;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,7 +33,7 @@ public class GameListener implements Listener {
         resetHotbar(player);
 
         if (this.plugin.getSpawnController().getSpawnLocation() != null) {
-            LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("Spawn", this.plugin.getSpawnController().getSpawnLocation().toBukkitLocation(), -1, true, true));
+            LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("SPAWN", this.plugin.getSpawnController().getSpawnLocation().toBukkitLocation(), Color.AQUA.asBGR(), true, true));
         }
     }
 
