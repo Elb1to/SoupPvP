@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
  */
 public class SetStatCommand extends BaseCommand {
 
-    @Override @Command(name = "setstat", aliases = "setstats", usage = "Usage: /setstat <player> <kills/deaths> <amount>")
+    @Override @Command(name = "setstat", permission = "soup-pvp.admin", aliases = "setstats", usage = "Usage: /setstat <player> <kills/deaths> <amount>")
     public void onCommand(CommandArgs command) {
         Player player = command.getPlayer();
         String[] args = command.getArgs();

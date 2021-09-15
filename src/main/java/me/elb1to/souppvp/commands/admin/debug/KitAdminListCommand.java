@@ -17,7 +17,7 @@ public class KitAdminListCommand extends BaseCommand {
 
     private final SoupPvP plugin = SoupPvP.getInstance();
 
-    @Override @Command(name = "kitadmin.list")
+    @Override @Command(name = "kitadmin.list", permission = "soup-pvp.admin")
     public void onCommand(CommandArgs command) {
         Player player = command.getPlayer();
 
