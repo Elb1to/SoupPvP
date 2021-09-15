@@ -6,6 +6,7 @@ import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.events.CombatTagEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,8 +28,8 @@ public class CombatListener implements Listener {
             Player attacker = (Player) event.getDamager();
 
             Bukkit.getPluginManager().callEvent(new CombatTagEvent(player, attacker));
-            this.plugin.getCombatManager().setCombatTime(player, 15);
-            this.plugin.getCombatManager().setCombatTime(attacker, 15);
+            this.plugin.getCombatManager().setCombatTime(player, 16);
+            this.plugin.getCombatManager().setCombatTime(attacker, 16);
             this.plugin.getCombatManager().setCombatSet(player, true);
             this.plugin.getCombatManager().setCombatSet(attacker, true);
         }
@@ -40,10 +41,10 @@ public class CombatListener implements Listener {
         Player attacker = event.getAttacker();
 
         if (LunarClientAPI.getInstance().isRunningLunarClient(player)) {
-            LunarClientAPI.getInstance().sendPacket(player, new LCPacketCooldown("Combat Cooldown", 15000, 218));
+            LunarClientAPI.getInstance().sendPacket(player, new LCPacketCooldown("Combat Cooldown", 16000, Material.DIAMOND_SWORD.getId()));
         }
         if (LunarClientAPI.getInstance().isRunningLunarClient(attacker)) {
-            LunarClientAPI.getInstance().sendPacket(attacker, new LCPacketCooldown("Combat Cooldown", 15000, 218));
+            LunarClientAPI.getInstance().sendPacket(attacker, new LCPacketCooldown("Combat Cooldown", 16000, Material.DIAMOND_SWORD.getId()));
         }
     }
 

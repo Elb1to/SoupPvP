@@ -32,7 +32,7 @@ public class CombatManager extends BukkitRunnable {
     public void setCombatSet(Player player, boolean b) {
         if (b) {
             combatSet.add(player);
-            timeMap.put(player, 15);
+            timeMap.put(player, 16);
         } else {
             combatSet.remove(player);
             timeMap.remove(player);
@@ -48,7 +48,6 @@ public class CombatManager extends BukkitRunnable {
         if (b) {
             spawnSet.add(player);
             spawnMap.put(player, 5);
-
         } else {
             spawnSet.remove(player);
             spawnMap.remove(player);
@@ -81,7 +80,7 @@ public class CombatManager extends BukkitRunnable {
                     plugin.getCombatManager().getTimeMap().remove(player);
                 }
             }
-            if (count == 150) {
+            if (count == 160) {
                 count = 0;
             }
         }
