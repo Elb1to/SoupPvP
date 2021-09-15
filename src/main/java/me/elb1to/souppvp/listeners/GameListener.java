@@ -22,6 +22,8 @@ import static me.elb1to.souppvp.utils.PlayerUtil.*;
  */
 public class GameListener implements Listener {
 
+    private final SoupPvP plugin = SoupPvP.getInstance();
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -29,7 +31,9 @@ public class GameListener implements Listener {
         resetPlayer(player);
         resetHotbar(player);
 
-        LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("Spawn", SoupPvP.getInstance().getSpawnController().getSpawnLocation().toBukkitLocation(), -1, true, true));
+        if (this.plugin.getSpawnController().getSpawnLocation() != null) {
+            LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("Spawn", this.plugin.getSpawnController().getSpawnLocation().toBukkitLocation(), -1, true, true));
+        }
     }
 
     @EventHandler
@@ -39,7 +43,7 @@ public class GameListener implements Listener {
             return;
         }
 
-        User user = SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId());
+        User user = this.plugin.getUserManager().getByUuid(player.getUniqueId());
         if (user == null) return;
 
         if (event.getItem().equals(KIT_SELECTOR)) {
@@ -49,7 +53,7 @@ public class GameListener implements Listener {
         } else if (event.getItem().equals(PLAYER_PERKS)) {
             player.sendMessage("Open Perks Menu");
         } else if (event.getItem().equals(PREVIOUS_KIT)) {
-            SoupPvP.getInstance().getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
+            this.plugin.getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
         } else if (event.getItem().getType().equals(Material.SKULL_ITEM)) {
             sendStats(player, user);
         }
