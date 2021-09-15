@@ -44,7 +44,7 @@ public class PayCommand extends BaseCommand {
             return;
         }
 
-        User targetUser = SoupPvP.getInstance().getUserManager().getByUuid(target.getUniqueId());
+        User targetUser = this.plugin.getUserManager().getByUuid(target.getUniqueId());
         if (targetUser == null) {
             player.sendMessage(translate("&c" + target.getName() + " doesn't have data stored."));
             return;
