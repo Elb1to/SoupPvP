@@ -2,7 +2,6 @@ package me.elb1to.souppvp.commands.user;
 
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.user.User;
-import me.elb1to.souppvp.utils.ColorHelper;
 import me.elb1to.souppvp.utils.command.BaseCommand;
 import me.elb1to.souppvp.utils.command.Command;
 import me.elb1to.souppvp.utils.command.CommandArgs;
@@ -20,13 +19,13 @@ public class PayCommand extends BaseCommand {
 
     private final SoupPvP plugin = SoupPvP.getInstance();
 
-    @Override @Command(name = "pay", aliases = {"p2p"})
+    @Override @Command(name = "pay", aliases = "p2p")
     public void onCommand(CommandArgs command) {
         Player player = command.getPlayer();
         String[] args = command.getArgs();
 
         if (plugin.getCombatManager().isCombat(player)) {
-            player.sendMessage(ColorHelper.translate("&cYou can't use commands whilst in combat."));
+            player.sendMessage(translate("&cYou can't use commands whilst in combat."));
             return;
         }
 
