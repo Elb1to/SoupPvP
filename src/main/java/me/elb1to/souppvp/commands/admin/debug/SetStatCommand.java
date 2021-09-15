@@ -16,13 +16,13 @@ import org.bukkit.entity.Player;
  */
 public class SetStatCommand extends BaseCommand {
 
-    @Override @Command(name = "setstat")
+    @Override @Command(name = "setstat", aliases = "setstats", usage = "Usage: /setstat <player> <kills/deaths> <amount>")
     public void onCommand(CommandArgs command) {
         Player player = command.getPlayer();
         String[] args = command.getArgs();
 
         if (args.length < 3) {
-            player.sendMessage(ColorHelper.translate("&cUsage: /setstat <player> <kills/deaths> <amount>"));
+            player.sendMessage(ColorHelper.translate("&c" + command.getCommand().getUsage()));
             return;
         }
 
@@ -45,6 +45,9 @@ public class SetStatCommand extends BaseCommand {
                 break;
             case "deaths":
                 targetUser.setDeaths(amount);
+                break;
+            default:
+                player.sendMessage(ColorHelper.translate("&c" + command.getCommand().getUsage()));
                 break;
         }
 
