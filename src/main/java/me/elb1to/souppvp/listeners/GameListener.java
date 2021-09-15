@@ -33,7 +33,7 @@ public class GameListener implements Listener {
         resetHotbar(player);
 
         if (this.plugin.getSpawnController().getSpawnLocation() != null) {
-            LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("SPAWN", this.plugin.getSpawnController().getSpawnLocation().toBukkitLocation(), Color.AQUA.asBGR(), true, true));
+            LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("SPAWN", this.plugin.getSpawnController().getSpawnLocation().toBukkitLocation(), Color.AQUA.asRGB(), true, true));
         }
     }
 
