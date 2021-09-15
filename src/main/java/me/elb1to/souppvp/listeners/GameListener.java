@@ -47,7 +47,9 @@ public class GameListener implements Listener {
         }
 
         User user = this.plugin.getUserManager().getByUuid(player.getUniqueId());
-        if (user == null) return;
+        if (user == null) {
+            return;
+        }
 
         if (event.getItem().equals(KIT_SELECTOR)) {
             new KitSelectionMenu().openMenu(player);
@@ -56,7 +58,11 @@ public class GameListener implements Listener {
         } else if (event.getItem().equals(PLAYER_PERKS)) {
             player.sendMessage("Open Perks Menu");
         } else if (event.getItem().equals(PREVIOUS_KIT)) {
-            this.plugin.getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
+            if (user.getCurrentKitName() == null) {
+                this.plugin.getKitManager().getKitByName("Default").equipKit(player);
+            } else {
+                this.plugin.getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
+            }
         } else if (event.getItem().getType().equals(Material.SKULL_ITEM)) {
             sendStats(player, user);
         }
@@ -95,7 +101,11 @@ public class GameListener implements Listener {
             return;
         }
         if (!this.plugin.getSpawnController().getCuboid().isIn((player)) && (from.getBlockX() != to.getBlockX() || from.getBlockZ() != to.getBlockZ()) && player.getInventory().contains(KIT_SELECTOR)) {
-            this.plugin.getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
+            if (user.getCurrentKitName() == null) {
+                this.plugin.getKitManager().getKitByName("Default").equipKit(player);
+            } else {
+                this.plugin.getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
+            }
         }
     }
 }
