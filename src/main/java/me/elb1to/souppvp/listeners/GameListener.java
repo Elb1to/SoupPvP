@@ -75,7 +75,11 @@ public class GameListener implements Listener {
 
     @EventHandler
     public void onBowlDrop(PlayerDropItemEvent event) {
-        if (event.getItemDrop().getItemStack().getType() == Material.BOWL) {
+        Material drop = event.getItemDrop().getItemStack().getType();
+        if (drop.name().contains("SWORD") || drop.name().contains("AXE")) {
+            event.setCancelled(true);
+        }
+        if (drop == Material.BOWL) {
             event.getItemDrop().remove();
         }
     }
