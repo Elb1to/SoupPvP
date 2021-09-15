@@ -61,6 +61,16 @@ public class PlayerUtil {
         player.updateInventory();
     }
 
+    public static boolean isInvEmpty(Player player) {
+        for (ItemStack item : player.getInventory().getContents()) {
+            if (item != null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void sendStats(Player player, User user) {
         final String[] stats = new String[]{
             "&7&m-----------------------------------------------------",
