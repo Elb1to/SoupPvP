@@ -5,18 +5,19 @@ import me.elb1to.souppvp.controller.ClassRegistrationController;
 import me.elb1to.souppvp.controller.SpawnController;
 import me.elb1to.souppvp.database.MongoSrv;
 import me.elb1to.souppvp.layout.ServerScoreboard;
-import me.elb1to.souppvp.listeners.combat.CombatManager;
+import me.elb1to.souppvp.user.CombatManager;
 import me.elb1to.souppvp.loadout.ability.AbilityManager;
 import me.elb1to.souppvp.loadout.kit.KitManager;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.UserManager;
-import me.elb1to.souppvp.utils.ColorHelper;
 import me.elb1to.souppvp.utils.command.CommandFramework;
 import me.elb1to.souppvp.utils.scoreboard.BoardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
 
 /**
  * Created by Elb1to
@@ -44,8 +45,8 @@ public final class SoupPvP extends JavaPlugin {
 		this.saveDefaultConfig();
 
 		Bukkit.getConsoleSender().sendMessage("------------------------------------------------");
-		Bukkit.getConsoleSender().sendMessage(ColorHelper.translate("&bSoupPvP - Lunar.GG Replica &8- &fv" + getDescription().getVersion()));
-		Bukkit.getConsoleSender().sendMessage(ColorHelper.translate("&7Made on &bFrozed Club Development &7by &bElb1to"));
+		Bukkit.getConsoleSender().sendMessage(translate("&bSoupPvP - Lunar.GG Replica &8- &fv" + getDescription().getVersion()));
+		Bukkit.getConsoleSender().sendMessage(translate("&7Made on &bFrozed Club Development &7by &bElb1to"));
 		Bukkit.getConsoleSender().sendMessage("------------------------------------------------");
 
 		this.loadManagers();
