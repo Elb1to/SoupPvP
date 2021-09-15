@@ -1,6 +1,9 @@
 package me.elb1to.souppvp.listeners;
 
+import com.lunarclient.bukkitapi.LunarClientAPI;
+import com.lunarclient.bukkitapi.nethandler.client.LCPacketCooldown;
 import me.elb1to.souppvp.SoupPvP;
+import me.elb1to.souppvp.events.CombatTagEvent;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Bukkit;
@@ -63,20 +66,43 @@ public class PvPListener implements Listener {
 
             resetPlayer(victim);
             resetHotbar(victim);
+
+            this.plugin.getCombatManager().setCombatSet(victim, false);
         }, 1L);
     }
 
     @EventHandler
     public void onPvP(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) {
+        if (!(event.getDamager() instanceof Player) || !(event.getEntity() instanceof Player)) {
             return;
         }
 
         Player victim = (Player) event.getEntity();
         Player attacker = (Player) event.getDamager();
+        if (this.plugin.getSpawnController().getCuboid().isIn((victim)) && this.plugin.getSpawnController().getCuboid().isIn((attacker)) ||
+            !this.plugin.getSpawnController().getCuboid().isIn((victim)) && this.plugin.getSpawnController().getCuboid().isIn((attacker)) ||
+            this.plugin.getSpawnController().getCuboid().isIn((victim)) && !this.plugin.getSpawnController().getCuboid().isIn((attacker))) {
 
-        if (inCuboid(victim) && inCuboid(attacker) || !inCuboid(victim) && inCuboid(attacker) || inCuboid(victim) && !inCuboid(attacker)) {
             event.setCancelled(true);
+        }
+
+        Bukkit.getPluginManager().callEvent(new CombatTagEvent(victim, attacker));
+        this.plugin.getCombatManager().setCombatTime(victim, 16);
+        this.plugin.getCombatManager().setCombatTime(attacker, 16);
+        this.plugin.getCombatManager().setCombatSet(victim, true);
+        this.plugin.getCombatManager().setCombatSet(attacker, true);
+    }
+
+    @EventHandler
+    public void onCombatTag(CombatTagEvent event) {
+        Player player = event.getPlayer();
+        Player attacker = event.getAttacker();
+
+        if (LunarClientAPI.getInstance().isRunningLunarClient(player)) {
+            LunarClientAPI.getInstance().sendPacket(player, new LCPacketCooldown("Combat Cooldown", 16000, Material.DIAMOND_SWORD.getId()));
+        }
+        if (LunarClientAPI.getInstance().isRunningLunarClient(attacker)) {
+            LunarClientAPI.getInstance().sendPacket(attacker, new LCPacketCooldown("Combat Cooldown", 16000, Material.DIAMOND_SWORD.getId()));
         }
     }
 
@@ -84,12 +110,8 @@ public class PvPListener implements Listener {
     public void onPlayerDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
 
-        if (inCuboid((Player) event.getEntity())) {
+        if (this.plugin.getSpawnController().getCuboid().isIn((Player) event.getEntity())) {
             event.setCancelled(true);
         }
-    }
-
-    private boolean inCuboid(Player player) {
-        return this.plugin.getSpawnController().getCuboid().isIn(player);
     }
 }
