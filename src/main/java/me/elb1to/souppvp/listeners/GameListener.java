@@ -6,6 +6,7 @@ import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.ui.kit.KitSelectionMenu;
 import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 import static me.elb1to.souppvp.utils.PlayerUtil.*;
 
@@ -75,6 +77,21 @@ public class GameListener implements Listener {
     public void onBowlDrop(PlayerDropItemEvent event) {
         if (event.getItemDrop().getItemStack().getType() == Material.BOWL) {
             event.getItemDrop().remove();
+        }
+    }
+
+    @EventHandler
+    public void onSpawnExit(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        Location from = event.getFrom();
+        Location to = event.getTo();
+
+        User user = this.plugin.getUserManager().getByUuid(player.getUniqueId());
+        if (user == null) {
+            return;
+        }
+        if (!this.plugin.getSpawnController().getCuboid().isIn((player)) && (from.getBlockX() != to.getBlockX() || from.getBlockZ() != to.getBlockZ()) && player.getInventory().contains(KIT_SELECTOR)) {
+            this.plugin.getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
         }
     }
 }
