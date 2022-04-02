@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
+
 /**
  * Created by Elb1to
  * Project: SoupPvP
@@ -38,18 +40,18 @@ public class SelectKitButton extends Button {
             lore.add("&aClick here to purchase.");
         }
 
-        return new ItemBuilder(kit.getIcon()).name(ColorHelper.translate("&a" + kit.getName())).lore(ColorHelper.translate(lore)).hideFlags().build();
+        return new ItemBuilder(kit.getIcon()).name(translate("&a" + kit.getName())).lore(translate(lore)).hideFlags().build();
     }
 
     @Override
     public void clicked(Player player, int slot, ClickType clickType, int hotbarButton) {
         if (!user.getUnlockedKits().contains(kit.getName())) {
             if (user.getCredits() < kit.getPrice()) {
-                player.sendMessage(ColorHelper.translate("&cNot enough credits!"));
+                player.sendMessage(translate("&cNot enough credits!"));
             } else {
                 user.getUnlockedKits().add(kit.getName());
                 user.setCredits(user.getCredits() - kit.getPrice());
-                player.sendMessage(ColorHelper.translate("&eYou have purchased the &d" + kit.getName() + "&e kit."));
+                player.sendMessage(translate("&eYou have purchased the &d" + kit.getName() + "&e kit."));
             }
 
             return;

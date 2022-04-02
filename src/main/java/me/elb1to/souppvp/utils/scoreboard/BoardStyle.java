@@ -1,26 +1,21 @@
 package me.elb1to.souppvp.utils.scoreboard;
 
+import lombok.Getter;
+
 /**
  * Created by: ThatKawaiiSam
  * Project: Assemble
  */
+@Getter
 public enum BoardStyle {
 
 	MODERN(false, 1);
 
-	private int start;
-	private boolean descending;
+	private final int start;
+	private final boolean descending;
 
 	BoardStyle(boolean descending, int start) {
 		this.descending = descending;
 		this.start = start;
-	}
-
-	public boolean isDescending() {
-		return this.descending;
-	}
-
-	public int getStart() {
-		return this.start;
 	}
 }

@@ -23,22 +23,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>destroystokyo-releases</id>
-            <url>https://repo.destroystokyo.com/repository/maven-releases/</url>
-        </repository>
-        <repository>
-            <id>destroystokyo-snapshots</id>
-            <url>https://repo.destroystokyo.com/repository/maven-snapshots/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <!-- Spigot 1.8.8 -->
         <dependency>
-            <groupId>org.github.paperspigot</groupId>
-            <artifactId>paperspigot-api</artifactId>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-server</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/PaperSpigot-1.8.8-R0.1-SNAPSHOT.jar</systemPath>

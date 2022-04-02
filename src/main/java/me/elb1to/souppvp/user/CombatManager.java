@@ -2,7 +2,6 @@ package me.elb1to.souppvp.user;
 
 import lombok.Getter;
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -12,14 +11,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
+
 /**
  * Created by Infames
  * Date: 23/07/2021 @ 20:08
  */
 @Getter
 public class CombatManager extends BukkitRunnable {
-
-    private final SoupPvP plugin = SoupPvP.getInstance();
 
     private final Set<Player> combatSet = new HashSet<>();
     private final Map<Player, Integer> timeMap = new HashMap<>();
@@ -54,14 +53,14 @@ public class CombatManager extends BukkitRunnable {
         count++;
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (plugin.getCombatManager().isCombat(player)) {
-                int count = plugin.getCombatManager().getCombatTime(player);
+            if (SoupPvP.getInstance().getCombatManager().isCombat(player)) {
+                int count = SoupPvP.getInstance().getCombatManager().getCombatTime(player);
                 --count;
-                plugin.getCombatManager().setCombatTime(player, count);
+                SoupPvP.getInstance().getCombatManager().setCombatTime(player, count);
                 if (count == 0) {
-                    player.sendMessage(ColorHelper.translate("&aYou are no longer in combat"));
-                    plugin.getCombatManager().getCombatSet().remove(player);
-                    plugin.getCombatManager().getTimeMap().remove(player);
+                    player.sendMessage(translate("&aYou are no longer in combat"));
+                    SoupPvP.getInstance().getCombatManager().getCombatSet().remove(player);
+                    SoupPvP.getInstance().getCombatManager().getTimeMap().remove(player);
                 }
             }
 

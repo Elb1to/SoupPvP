@@ -19,8 +19,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
  */
 public class UserListener implements Listener {
 
-    private final SoupPvP plugin = SoupPvP.getInstance();
-
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
         Player player = Bukkit.getPlayer(event.getUniqueId());
@@ -28,17 +26,17 @@ public class UserListener implements Listener {
             event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
             event.setKickMessage("§cYou tried to login too quickly after disconnecting.\n§cTry again in a few seconds.");
 
-            this.plugin.getServer().getScheduler().runTask(this.plugin, () -> player.kickPlayer("§cDuplicate login kick"));
+            SoupPvP.getInstance().getServer().getScheduler().runTask(SoupPvP.getInstance(), () -> player.kickPlayer("§cDuplicate login kick"));
             return;
         }
 
-        User user = this.plugin.getUserManager().getOrCreate(event.getUniqueId());
-        this.plugin.getUserManager().saveUser(user);
+        User user = SoupPvP.getInstance().getUserManager().getOrCreate(event.getUniqueId());
+        SoupPvP.getInstance().getUserManager().saveUser(user);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerLoginEvent(PlayerLoginEvent event) {
-        User user = this.plugin.getUserManager().getOrCreate(event.getPlayer().getUniqueId());
+        User user = SoupPvP.getInstance().getUserManager().getOrCreate(event.getPlayer().getUniqueId());
         if (user == null) {
             event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
             event.setKickMessage("§cAn error has ocurred while loading your profile. Please reconnect.");
@@ -46,7 +44,7 @@ public class UserListener implements Listener {
         }
 
         if (!user.isLoaded()) {
-            this.plugin.getUserManager().saveUser(user);
+            SoupPvP.getInstance().getUserManager().saveUser(user);
             event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
             event.setKickMessage("§cAn error has ocurred while loading your profile. Please reconnect.");
         }
@@ -63,9 +61,9 @@ public class UserListener implements Listener {
     }
 
     private void handledSaveDate(Player player) {
-        User user = this.plugin.getUserManager().getOrCreate(player.getUniqueId());
+        User user = SoupPvP.getInstance().getUserManager().getOrCreate(player.getUniqueId());
         if (user != null) {
-            this.plugin.getUserManager().deleteUser(player.getUniqueId());
+            SoupPvP.getInstance().getUserManager().deleteUser(player.getUniqueId());
         }
     }
 }

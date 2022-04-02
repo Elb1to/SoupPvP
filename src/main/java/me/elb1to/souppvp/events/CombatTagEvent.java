@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerEvent;
 @Getter
 public class CombatTagEvent extends PlayerEvent {
 
-    private static final HandlerList HANDLERS = new HandlerList();
+    private static final HandlerList handlers = new HandlerList();
     private final Player attacker;
 
     public CombatTagEvent(Player player, Player attacker) {
@@ -20,12 +20,8 @@ public class CombatTagEvent extends PlayerEvent {
         this.attacker = attacker;
     }
 
-    public static HandlerList getHandlerList() {
-        return HANDLERS;
-    }
-
     public HandlerList getHandlers() {
-        return HANDLERS;
+        return handlers;
     }
 }
 

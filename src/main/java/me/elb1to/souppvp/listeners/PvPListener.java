@@ -5,7 +5,6 @@ import com.lunarclient.bukkitapi.nethandler.client.LCPacketCooldown;
 import me.elb1to.souppvp.SoupPvP;
 import me.elb1to.souppvp.events.CombatTagEvent;
 import me.elb1to.souppvp.user.User;
-import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
 import static me.elb1to.souppvp.utils.PlayerUtil.resetHotbar;
 import static me.elb1to.souppvp.utils.PlayerUtil.resetPlayer;
 
@@ -24,8 +24,6 @@ import static me.elb1to.souppvp.utils.PlayerUtil.resetPlayer;
  * Date: 7/23/2021 @ 3:07 PM
  */
 public class PvPListener implements Listener {
-
-    private final SoupPvP plugin = SoupPvP.getInstance();
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
@@ -39,10 +37,10 @@ public class PvPListener implements Listener {
             User killerUser = SoupPvP.getInstance().getUserManager().getByUuid(killer.getUniqueId());
 
             if (killerUser.getCurrentKitName().equals("CopyCat")) {
-                this.plugin.getKitManager().getKitByName(victimUser.getCurrentKitName()).equipKit(killer);
+                SoupPvP.getInstance().getKitManager().getKitByName(victimUser.getCurrentKitName()).equipKit(killer);
             }
-            event.getEntity().sendMessage(ColorHelper.translate("&cYou have been killed by &a" + event.getEntity().getKiller().getName() + "&c."));
-            event.getEntity().getKiller().sendMessage(ColorHelper.translate("&bYou have killed &a" + victim.getName() + " &bfor &a" + (killerUser.getCurrentKitName().equals("Pro") ? 20 : 10) + " credits&b."));
+            event.getEntity().sendMessage(translate("&cYou have been killed by &a" + event.getEntity().getKiller().getName() + "&c."));
+            event.getEntity().getKiller().sendMessage(translate("&bYou have killed &a" + victim.getName() + " &bfor &a" + (killerUser.getCurrentKitName().equals("Pro") ? 20 : 10) + " credits&b."));
             if (killerUser.getCurrentKitName().equals("Pro")) {
                 killerUser.setCredits(killerUser.getCredits() + 20);
             } else {
@@ -56,7 +54,7 @@ public class PvPListener implements Listener {
                 killerUser.setHighestKillstreak(killerUser.getCurrentKillstreak());
             }
         } else {
-            event.getEntity().sendMessage(ColorHelper.translate("&cYou have died."));
+            event.getEntity().sendMessage(translate("&cYou have died."));
         }
 
         victimUser.setDeaths(victimUser.getDeaths() + 1);
@@ -67,7 +65,7 @@ public class PvPListener implements Listener {
             resetPlayer(victim);
             resetHotbar(victim);
 
-            this.plugin.getCombatManager().setCombatSet(victim, false);
+            SoupPvP.getInstance().getCombatManager().setCombatSet(victim, false);
         }, 1L);
     }
 
@@ -79,18 +77,18 @@ public class PvPListener implements Listener {
 
         Player victim = (Player) event.getEntity();
         Player attacker = (Player) event.getDamager();
-        if (this.plugin.getSpawnController().getCuboid().isIn((victim)) && this.plugin.getSpawnController().getCuboid().isIn((attacker)) ||
-            !this.plugin.getSpawnController().getCuboid().isIn((victim)) && this.plugin.getSpawnController().getCuboid().isIn((attacker)) ||
-            this.plugin.getSpawnController().getCuboid().isIn((victim)) && !this.plugin.getSpawnController().getCuboid().isIn((attacker))) {
+        if (SoupPvP.getInstance().getSpawnController().getCuboid().isIn((victim)) && SoupPvP.getInstance().getSpawnController().getCuboid().isIn((attacker)) ||
+            !SoupPvP.getInstance().getSpawnController().getCuboid().isIn((victim)) && SoupPvP.getInstance().getSpawnController().getCuboid().isIn((attacker)) ||
+            SoupPvP.getInstance().getSpawnController().getCuboid().isIn((victim)) && !SoupPvP.getInstance().getSpawnController().getCuboid().isIn((attacker))) {
 
             event.setCancelled(true);
         }
 
         Bukkit.getPluginManager().callEvent(new CombatTagEvent(victim, attacker));
-        this.plugin.getCombatManager().setCombatTime(victim, 16);
-        this.plugin.getCombatManager().setCombatTime(attacker, 16);
-        this.plugin.getCombatManager().setCombatSet(victim, true);
-        this.plugin.getCombatManager().setCombatSet(attacker, true);
+        SoupPvP.getInstance().getCombatManager().setCombatTime(victim, 16);
+        SoupPvP.getInstance().getCombatManager().setCombatTime(attacker, 16);
+        SoupPvP.getInstance().getCombatManager().setCombatSet(victim, true);
+        SoupPvP.getInstance().getCombatManager().setCombatSet(attacker, true);
     }
 
     @EventHandler
@@ -110,7 +108,7 @@ public class PvPListener implements Listener {
     public void onPlayerDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
 
-        if (this.plugin.getSpawnController().getCuboid().isIn((Player) event.getEntity())) {
+        if (SoupPvP.getInstance().getSpawnController().getCuboid().isIn((Player) event.getEntity())) {
             event.setCancelled(true);
         }
     }

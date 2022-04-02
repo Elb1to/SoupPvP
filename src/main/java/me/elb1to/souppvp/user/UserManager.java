@@ -16,7 +16,6 @@ import java.util.*;
 public class UserManager {
 
     @Getter private final Map<UUID, User> users = new HashMap<>();
-    private final SoupPvP plugin = SoupPvP.getInstance();
 
     public User getOrCreate(UUID uuid) {
         return users.computeIfAbsent(uuid, User::new);
@@ -31,7 +30,7 @@ public class UserManager {
     }
 
     public void loadUser(User user) {
-        Document document = this.plugin.getMongoSrv().getUsers().find(Filters.eq("uniqueId", user.getUniqueId().toString())).first();
+        Document document = SoupPvP.getInstance().getMongoSrv().getUsers().find(Filters.eq("uniqueId", user.getUniqueId().toString())).first();
         if (document != null) {
             user.setCurrentKitName(document.getString("currentKitName"));
             user.setUnlockedKits((List<String>) document.get("unlockedKits"));
@@ -61,7 +60,7 @@ public class UserManager {
         document.put("currentKillstreak", user.getCurrentKillstreak());
         document.put("highestKillstreak", user.getHighestKillstreak());
 
-        this.plugin.getMongoSrv().getUsers().replaceOne(Filters.eq("uniqueId", user.getUniqueId().toString()), document, new UpdateOptions().upsert(true));
+        SoupPvP.getInstance().getMongoSrv().getUsers().replaceOne(Filters.eq("uniqueId", user.getUniqueId().toString()), document, new UpdateOptions().upsert(true));
     }
 
     public void deleteUser(UUID uniqueId) {

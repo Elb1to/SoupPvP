@@ -13,8 +13,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
  */
 public class AbilityListener implements Listener {
 
-    private final SoupPvP plugin = SoupPvP.getInstance();
-
     @EventHandler
     public void onRightClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -23,8 +21,8 @@ public class AbilityListener implements Listener {
         }
 
         if (event.getAction().name().startsWith("RIGHT_")) {
-            if (event.getItem().isSimilar(this.plugin.getAbilityManager().getAbilityByName("Shuriken").getItem())) {
-                this.plugin.getAbilityManager().getAbilityByName("Shuriken").getCallable().execute(player);
+            if (event.getItem().isSimilar(SoupPvP.getInstance().getAbilityManager().getAbilityByName("Shuriken").getItem())) {
+                SoupPvP.getInstance().getAbilityManager().getAbilityByName("Shuriken").getCallable().execute(player);
             }
         }
     }

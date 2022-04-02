@@ -5,9 +5,9 @@ import me.elb1to.souppvp.controller.ClassRegistrationController;
 import me.elb1to.souppvp.controller.SpawnController;
 import me.elb1to.souppvp.database.MongoSrv;
 import me.elb1to.souppvp.layout.ServerScoreboard;
-import me.elb1to.souppvp.user.CombatManager;
 import me.elb1to.souppvp.loadout.ability.AbilityManager;
 import me.elb1to.souppvp.loadout.kit.KitManager;
+import me.elb1to.souppvp.user.CombatManager;
 import me.elb1to.souppvp.user.User;
 import me.elb1to.souppvp.user.UserManager;
 import me.elb1to.souppvp.utils.command.CommandFramework;
@@ -54,7 +54,7 @@ public final class SoupPvP extends JavaPlugin {
 		crc.loadListeners("me.elb1to.souppvp.listeners");
 		crc.loadCommands("me.elb1to.souppvp.commands");
 
-		new BoardManager(new ServerScoreboard(), 20);
+		new BoardManager(new ServerScoreboard(), 1); // 20 -> 1 : maybe more reactivity
 	}
 
     @Override
@@ -64,9 +64,7 @@ public final class SoupPvP extends JavaPlugin {
         }
 
         for (Entity entity : this.getServer().getWorld("world").getEntities()) {
-            if (entity.getType() == EntityType.DROPPED_ITEM) {
-                entity.remove();
-            }
+            if (entity.getType() == EntityType.DROPPED_ITEM) entity.remove();
         }
 
         this.mongoSrv.disconnect();

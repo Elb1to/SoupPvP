@@ -15,8 +15,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 @Getter @Setter
 public class SpawnController {
 
-    private final SoupPvP plugin = SoupPvP.getInstance();
-
     private CustomLocation spawnLocation;
     private CustomLocation safezoneMin;
     private CustomLocation safezoneMax;
@@ -28,7 +26,7 @@ public class SpawnController {
     }
 
     private void loadConfig() {
-        final FileConfiguration config = this.plugin.getConfig();
+        final FileConfiguration config = SoupPvP.getInstance().getConfig();
 
         if (config.contains("SERVER.SPAWN.LOCATION")) {
             try {

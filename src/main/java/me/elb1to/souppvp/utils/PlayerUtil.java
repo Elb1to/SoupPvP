@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
+
 /**
  * Created by Elb1to
  * Project: SoupPvP
@@ -86,7 +88,7 @@ public class PlayerUtil {
         };
 
         for (String msg : stats) {
-            player.sendMessage(ColorHelper.translate(msg));
+            player.sendMessage(translate(msg));
         }
     }
 }

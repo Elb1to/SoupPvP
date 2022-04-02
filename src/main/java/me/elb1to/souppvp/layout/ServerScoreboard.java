@@ -18,8 +18,6 @@ import static me.elb1to.souppvp.utils.ColorHelper.translate;
  */
 public class ServerScoreboard implements BoardAdapter {
 
-    private final SoupPvP plugin = SoupPvP.getInstance();
-
     @Override
     public String getTitle(Player player) {
         return translate("&b&lSoupPvP");
@@ -35,9 +33,10 @@ public class ServerScoreboard implements BoardAdapter {
         strings.add(translate("Killstreak: &b" + user.getCurrentKillstreak()));
         strings.add(translate("Deaths: &b" + user.getDeaths()));
         strings.add(translate("Credits: &b" + user.getCredits()));
-        if (plugin.getCombatManager().isCombat(player)) {
-        strings.add(translate("&cCombat Tag&7: &f" + plugin.getCombatManager().getCombatTime(player) + "s"));
-        }
+
+        if (SoupPvP.getInstance().getCombatManager().isCombat(player))
+            strings.add(translate("&cCombat Tag&7: &f" + SoupPvP.getInstance().getCombatManager().getCombatTime(player) + "s"));
+
         strings.add(translate(" "));
         strings.add(translate("&bfrozed.club"));
         strings.add(translate("&7&m----------------------"));

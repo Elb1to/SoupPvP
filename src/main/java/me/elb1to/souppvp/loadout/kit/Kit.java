@@ -2,13 +2,14 @@ package me.elb1to.souppvp.loadout.kit;
 
 import lombok.Getter;
 import me.elb1to.souppvp.loadout.ability.Ability;
-import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.Arrays;
+
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
 
 /**
  * Created by Elb1to
@@ -40,7 +41,7 @@ public abstract class Kit {
 		this.giveSoups(player);
 
 		player.updateInventory();
-        player.sendMessage(ColorHelper.translate("&eYou have chosen the &d" + this.getName() + "&e kit."));
+        player.sendMessage(translate("&eYou have chosen the &d" + this.getName() + "&e kit."));
 	}
 
 	public abstract ItemStack[] getArmor();

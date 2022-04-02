@@ -2,13 +2,14 @@ package me.elb1to.souppvp.utils.scoreboard;
 
 import lombok.Getter;
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.*;
+
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
 
 /**
  * Created by: ThatKawaiiSam
@@ -17,8 +18,8 @@ import java.util.*;
 @Getter
 public class BoardManager {
 
-	private BoardAdapter adapter;
-	private Map<UUID, Board> boardMap;
+	private final BoardAdapter adapter;
+	private final Map<UUID, Board> boardMap;
 
 	public BoardManager(BoardAdapter adapter, int updateTick) {
 		this.adapter = adapter;
@@ -34,7 +35,7 @@ public class BoardManager {
 			if (board != null) {
 				Scoreboard scoreboard = board.getScoreboard();
 				Objective objective = board.getObjective();
-				String title = ColorHelper.translate(this.adapter.getTitle(player));
+				String title = translate(this.adapter.getTitle(player));
 				if (!objective.getDisplayName().equals(title)) {
 					objective.setDisplayName(title);
 				}
@@ -59,7 +60,7 @@ public class BoardManager {
 					int cache = this.adapter.getBoardStyle(player).getStart();
 					for (int i = 0; i < lines.size(); i++) {
 						BoardEntry entry = board.getEntryAtPosition(i);
-						String line = ColorHelper.translate(lines.get(i));
+						String line = translate(lines.get(i));
 						if (entry == null) {
 							entry = new BoardEntry(board, line);
 						}

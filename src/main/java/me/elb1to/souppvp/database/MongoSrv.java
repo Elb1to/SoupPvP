@@ -7,11 +7,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.utils.ColorHelper;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 
 import java.util.Collections;
+
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
 
 /**
  * Created by Elb1to
@@ -22,19 +23,18 @@ import java.util.Collections;
 public class MongoSrv {
 
 	private final MongoSrv instance;
-	private final SoupPvP plugin = SoupPvP.getInstance();
 
 	private MongoClient client;
 	private MongoDatabase mongoDatabase;
 
-	private final String host = this.plugin.getConfig().getString("MONGO.HOST");
-	private final int port = this.plugin.getConfig().getInt("MONGO.PORT");
-	private final String database = this.plugin.getConfig().getString("MONGO.DATABASE");
-	private final boolean authentication = this.plugin.getConfig().getBoolean("MONGO.AUTH.ENABLED");
+	private final String host = SoupPvP.getInstance().getConfig().getString("MONGO.HOST");
+	private final int port = SoupPvP.getInstance().getConfig().getInt("MONGO.PORT");
+	private final String database = SoupPvP.getInstance().getConfig().getString("MONGO.DATABASE");
+	private final boolean authentication = SoupPvP.getInstance().getConfig().getBoolean("MONGO.AUTH.ENABLED");
 
-	private final String user = this.plugin.getConfig().getString("MONGO.AUTH.USERNAME");
-	private final String password = this.plugin.getConfig().getString("MONGO.AUTH.PASSWORD");
-	private final String authDatabase = this.plugin.getConfig().getString("MONGO.AUTH.AUTH-DATABASE");
+	private final String user = SoupPvP.getInstance().getConfig().getString("MONGO.AUTH.USERNAME");
+	private final String password = SoupPvP.getInstance().getConfig().getString("MONGO.AUTH.PASSWORD");
+	private final String authDatabase = SoupPvP.getInstance().getConfig().getString("MONGO.AUTH.AUTH-DATABASE");
 
 	private boolean connected;
 
@@ -55,20 +55,20 @@ public class MongoSrv {
 			this.users = this.mongoDatabase.getCollection("users");
 		} catch (Exception e) {
 			connected = false;
-			Bukkit.getConsoleSender().sendMessage(ColorHelper.translate("&b[SoupPvP] &cFailed to connect to MongoDB"));
+			Bukkit.getConsoleSender().sendMessage(translate("&b[SoupPvP] &cFailed to connect to MongoDB"));
 			e.printStackTrace();
 
-			Bukkit.getServer().getPluginManager().disablePlugin(this.plugin);
-			Bukkit.getConsoleSender().sendMessage(ColorHelper.translate("&b[SoupPvP] &cDisabling plugin..."));
+			Bukkit.getServer().getPluginManager().disablePlugin(SoupPvP.getInstance());
+			Bukkit.getConsoleSender().sendMessage(translate("&b[SoupPvP] &cDisabling plugin..."));
 		}
 	}
 
 	public void disconnect() {
 		if (this.client != null) {
-			this.plugin.getLogger().info("[SoupPvP] Disconnecting MongoDB...");
+            SoupPvP.getInstance().getLogger().info("[SoupPvP] Disconnecting MongoDB...");
 			this.client.close();
 			this.connected = false;
-			this.plugin.getLogger().info("[SoupPvP] MongoDB has been successfully disconnected.");
+            SoupPvP.getInstance().getLogger().info("[SoupPvP] MongoDB has been successfully disconnected.");
 		}
 	}
 }

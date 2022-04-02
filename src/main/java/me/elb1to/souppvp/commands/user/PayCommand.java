@@ -17,14 +17,12 @@ import static me.elb1to.souppvp.utils.ColorHelper.translate;
  */
 public class PayCommand extends BaseCommand {
 
-    private final SoupPvP plugin = SoupPvP.getInstance();
-
     @Override @Command(name = "pay", aliases = "p2p")
     public void onCommand(CommandArgs command) {
         Player player = command.getPlayer();
         String[] args = command.getArgs();
 
-        if (plugin.getCombatManager().isCombat(player)) {
+        if (SoupPvP.getInstance().getCombatManager().isCombat(player)) {
             player.sendMessage(translate("&cYou can't use commands whilst in combat."));
             return;
         }
@@ -44,7 +42,7 @@ public class PayCommand extends BaseCommand {
             return;
         }
 
-        User targetUser = this.plugin.getUserManager().getByUuid(target.getUniqueId());
+        User targetUser = SoupPvP.getInstance().getUserManager().getByUuid(target.getUniqueId());
         if (targetUser == null) {
             player.sendMessage(translate("&c" + target.getName() + " doesn't have data stored."));
             return;
@@ -56,7 +54,7 @@ public class PayCommand extends BaseCommand {
             return;
         }
 
-        User user = this.plugin.getUserManager().getByUuid(player.getUniqueId());
+        User user = SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId());
         if (user.getCredits() < creditsSent) {
             player.sendMessage(translate("&cYou don't have enough credits to send."));
             return;

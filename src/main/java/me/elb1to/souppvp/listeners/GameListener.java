@@ -25,8 +25,6 @@ import static me.elb1to.souppvp.utils.PlayerUtil.*;
  */
 public class GameListener implements Listener {
 
-    private final SoupPvP plugin = SoupPvP.getInstance();
-
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -34,8 +32,8 @@ public class GameListener implements Listener {
         resetPlayer(player);
         resetHotbar(player);
 
-        if (this.plugin.getSpawnController().getSpawnLocation() != null) {
-            LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("SPAWN", this.plugin.getSpawnController().getSpawnLocation().toBukkitLocation(), Color.AQUA.asRGB(), true, true));
+        if (SoupPvP.getInstance().getSpawnController().getSpawnLocation() != null) {
+            LunarClientAPI.getInstance().sendWaypoint(player, new LCWaypoint("SPAWN", SoupPvP.getInstance().getSpawnController().getSpawnLocation().toBukkitLocation(), Color.AQUA.asRGB(), true, true));
         }
     }
 
@@ -46,7 +44,7 @@ public class GameListener implements Listener {
             return;
         }
 
-        User user = this.plugin.getUserManager().getByUuid(player.getUniqueId());
+        User user = SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId());
         if (user == null) {
             return;
         }
@@ -59,9 +57,9 @@ public class GameListener implements Listener {
             player.sendMessage("Open Perks Menu");
         } else if (event.getItem().equals(PREVIOUS_KIT)) {
             if (user.getCurrentKitName() == null) {
-                this.plugin.getKitManager().getKitByName("Default").equipKit(player);
+                SoupPvP.getInstance().getKitManager().getKitByName("Default").equipKit(player);
             } else {
-                this.plugin.getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
+                SoupPvP.getInstance().getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
             }
         } else if (event.getItem().getType().equals(Material.SKULL_ITEM)) {
             sendStats(player, user);
@@ -96,15 +94,15 @@ public class GameListener implements Listener {
         Location from = event.getFrom();
         Location to = event.getTo();
 
-        User user = this.plugin.getUserManager().getByUuid(player.getUniqueId());
+        User user = SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId());
         if (user == null) {
             return;
         }
-        if (!this.plugin.getSpawnController().getCuboid().isIn((player)) && (from.getBlockX() != to.getBlockX() || from.getBlockZ() != to.getBlockZ()) && player.getInventory().contains(KIT_SELECTOR)) {
+        if (!SoupPvP.getInstance().getSpawnController().getCuboid().isIn((player)) && (from.getBlockX() != to.getBlockX() || from.getBlockZ() != to.getBlockZ()) && player.getInventory().contains(KIT_SELECTOR)) {
             if (user.getCurrentKitName() == null) {
-                this.plugin.getKitManager().getKitByName("Default").equipKit(player);
+                SoupPvP.getInstance().getKitManager().getKitByName("Default").equipKit(player);
             } else {
-                this.plugin.getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
+                SoupPvP.getInstance().getKitManager().getKitByName(user.getCurrentKitName()).equipKit(player);
             }
         }
     }

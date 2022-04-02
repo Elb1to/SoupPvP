@@ -1,7 +1,6 @@
 package me.elb1to.souppvp.utils.command;
 
 import me.elb1to.souppvp.SoupPvP;
-import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
@@ -18,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import static me.elb1to.souppvp.utils.ColorHelper.translate;
+
 /**
  * Command Framework - BukkitCommand
  * An implementation of Bukkit's Command class allowing for registering of commands without plugin.yml
@@ -27,7 +28,7 @@ import java.util.Map.Entry;
 public class CommandFramework implements CommandExecutor {
 
 	private final SoupPvP plugin;
-	private Map<String, Entry<Method, Object>> commandMap = new HashMap<>();
+	private final Map<String, Entry<Method, Object>> commandMap = new HashMap<>();
 	private CommandMap map;
 
 	public CommandFramework(SoupPvP plugin) {
@@ -64,11 +65,11 @@ public class CommandFramework implements CommandExecutor {
 				Object methodObject = commandMap.get(cmdLabel).getValue();
 				Command command = method.getAnnotation(Command.class);
 				if (!command.permission().equals("") && (!sender.hasPermission(command.permission()))) {
-					sender.sendMessage(ColorHelper.translate("&cYou don't have permissions to perform this."));
+					sender.sendMessage(translate("&cYou don't have permissions to perform this."));
 					return true;
 				}
 				if (command.inGameOnly() && !(sender instanceof Player)) {
-					sender.sendMessage(ColorHelper.translate("&cThis command can only be executed in game."));
+					sender.sendMessage(translate("&cThis command can only be executed in game."));
 					return true;
 				}
 

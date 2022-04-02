@@ -31,7 +31,7 @@ public class KitSelectionMenu extends Menu {
         for (Kit kit : SoupPvP.getInstance().getKitManager().getKits()) {
             buttons.put(buttons.size(), new SelectKitButton(kit, user));
         }
-        
+
         return buttons;
     }
 }
