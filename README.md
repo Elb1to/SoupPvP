@@ -2,7 +2,7 @@
  Lunar Network SoupPvP gamemode replica
  
 ## Disclaimer
-This is a work-in-progress, for that reason, a lot of features and essential parts of Lunar's SoupPvP might be missing or incomplete.
+This is just a base for making a SoupPvP plugin for your server.
 
 ### Usage terms:
   * You cannot claim that this was all made from scratch by you.
