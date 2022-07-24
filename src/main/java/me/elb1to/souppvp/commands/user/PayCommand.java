@@ -29,12 +29,12 @@ public class PayCommand extends BaseCommand {
             return;
         }
 
-        if (args.length < 2) {
+        if (args.length != 2) {
             player.sendMessage(translate("&cUsage: /pay <player> <amount>"));
             return;
         }
 
-        Player target = Bukkit.getPlayer(args[0]);
+        Player target = plugin.getServer().getPlayer(args[0]);
         if (target == null) {
             player.sendMessage(translate("&cThere are no players named '" + args[0] + "' online."));
             return;

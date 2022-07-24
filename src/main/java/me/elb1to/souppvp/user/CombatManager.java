@@ -53,7 +53,7 @@ public class CombatManager extends BukkitRunnable {
     public void run() {
         count++;
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : plugin.getServer().getOnlinePlayers()) {
             if (plugin.getCombatManager().isCombat(player)) {
                 int count = plugin.getCombatManager().getCombatTime(player);
                 --count;

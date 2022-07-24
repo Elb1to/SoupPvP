@@ -22,7 +22,7 @@ public class SetLocationCommand extends BaseCommand {
         Player player = command.getPlayer();
         String[] args = command.getArgs();
 
-        if (args.length == 0) {
+        if (args.length != 1) {
             player.sendMessage(ColorHelper.translate(command.getCommand().getUsage()));
             return;
         }

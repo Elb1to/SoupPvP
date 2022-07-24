@@ -21,12 +21,6 @@ public class AbilityManager {
     }
 
     public Ability getAbilityByName(String name) {
-        for (Ability ability : abilities) {
-            if (name.equals(ability.getName())) {
-                return ability;
-            }
-        }
-
-        return null;
+        return abilities.stream().filter(ability -> name.equals(ability.getName())).findFirst().orElse(null);
     }
 }

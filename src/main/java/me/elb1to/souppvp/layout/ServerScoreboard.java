@@ -27,7 +27,7 @@ public class ServerScoreboard implements BoardAdapter {
 
     @Override
     public List<String> getLines(Player player) {
-        User user = SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId());
+        User user = plugin.getUserManager().getByUuid(player.getUniqueId());
         List<String> strings = new ArrayList<>();
 
         strings.add(translate("&7&m----------------------"));

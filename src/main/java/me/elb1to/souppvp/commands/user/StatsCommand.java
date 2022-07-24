@@ -29,7 +29,7 @@ public class StatsCommand extends BaseCommand {
             return;
         }
 
-        Player target = Bukkit.getPlayer(args[0]);
+        Player target = plugin.getServer().getPlayer(args[0]);
         if (target == null) {
             player.sendMessage(ColorHelper.translate("&cThere are no players named '" + args[0] + "' online."));
             return;

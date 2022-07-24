@@ -44,10 +44,10 @@ public final class SoupPvP extends JavaPlugin {
 		instance = this;
 		this.saveDefaultConfig();
 
-		Bukkit.getConsoleSender().sendMessage("------------------------------------------------");
-		Bukkit.getConsoleSender().sendMessage(translate("&bSoupPvP - Lunar.GG Replica &8- &fv" + getDescription().getVersion()));
-		Bukkit.getConsoleSender().sendMessage(translate("&7Made on &bFrozed Club Development &7by &bElb1to"));
-		Bukkit.getConsoleSender().sendMessage("------------------------------------------------");
+		getServer().getConsoleSender().sendMessage("------------------------------------------------");
+		getServer().getConsoleSender().sendMessage(translate("&bSoupPvP - Lunar.GG Replica &8- &fv" + getDescription().getVersion()));
+		getServer().getConsoleSender().sendMessage(translate("&7Made on &bFrozed Club Development &7by &bElb1to"));
+		getServer().getConsoleSender().sendMessage("------------------------------------------------");
 
 		this.loadManagers();
 		combatManager.runTaskTimer(this, 0, 20);
@@ -59,15 +59,8 @@ public final class SoupPvP extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        for (User user : this.getUserManager().getAllUsers()) {
-            this.userManager.saveUser(user);
-        }
-
-        for (Entity entity : this.getServer().getWorld("world").getEntities()) {
-            if (entity.getType() == EntityType.DROPPED_ITEM) {
-                entity.remove();
-            }
-        }
+        getUserManager().getAllUsers().forEach(userManager::saveUser);
+        getServer().getWorld("world").getEntities().stream().filter(entity -> entity.getType() == EntityType.DROPPED_ITEM).forEach(Entity::remove);
 
         this.mongoSrv.disconnect();
     }
