@@ -1,6 +1,7 @@
 package me.elb1to.souppvp.loadout.kit;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import me.elb1to.souppvp.loadout.ability.Ability;
 import me.elb1to.souppvp.utils.ColorHelper;
 import org.bukkit.Material;
@@ -9,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Created by Elb1to
@@ -16,19 +18,13 @@ import java.util.Arrays;
  * Date: 5/6/2021 @ 1:54 PM
  */
 @Getter
+@RequiredArgsConstructor
 public abstract class Kit {
 
 	private final String name;
 	private final Material icon;
 	private final String[] desc;
 	private final int price;
-
-	public Kit(String name, Material icon, String[] desc, int price) {
-		this.name = name;
-        this.icon = icon;
-        this.desc = desc;
-		this.price = price;
-	}
 
 	public void equipKit(Player player) {
 		player.getInventory().clear();
@@ -52,11 +48,6 @@ public abstract class Kit {
     public abstract PotionEffect[] getPotionEffects();
 
 	private void giveSoups(Player player) {
-		final ItemStack soup = new ItemStack(Material.MUSHROOM_SOUP);
-		for (ItemStack inv : player.getInventory().getContents()) {
-			if (inv == null) {
-				player.getInventory().addItem(soup);
-			}
-		}
+        Arrays.stream(player.getInventory().getContents()).filter(Objects::isNull).map(itemStack -> new ItemStack(Material.MUSHROOM_SOUP)).forEach(soup -> player.getInventory().addItem(soup));
 	}
 }

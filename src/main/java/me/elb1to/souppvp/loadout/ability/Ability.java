@@ -1,6 +1,7 @@
 package me.elb1to.souppvp.loadout.ability;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -9,15 +10,11 @@ import org.bukkit.inventory.ItemStack;
  * Date: 5/6/2021 @ 9:26 PM
  */
 @Getter
+@RequiredArgsConstructor
 public abstract class Ability {
 
     private final String name;
     private final ItemStack item;
-
-    public Ability(String name, ItemStack item) {
-        this.name = name;
-        this.item = item;
-    }
 
     public abstract long getCooldown();
 

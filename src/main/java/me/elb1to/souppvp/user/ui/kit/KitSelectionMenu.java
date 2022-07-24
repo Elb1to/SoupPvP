@@ -26,12 +26,8 @@ public class KitSelectionMenu extends Menu {
     @Override
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
-        User user = SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId());
+        SoupPvP.getInstance().getKitManager().getKits().forEach(kit -> buttons.put(buttons.size(), new SelectKitButton(kit, SoupPvP.getInstance().getUserManager().getByUuid(player.getUniqueId()))));
 
-        for (Kit kit : SoupPvP.getInstance().getKitManager().getKits()) {
-            buttons.put(buttons.size(), new SelectKitButton(kit, user));
-        }
-        
         return buttons;
     }
 }

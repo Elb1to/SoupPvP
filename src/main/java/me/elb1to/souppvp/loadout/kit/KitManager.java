@@ -27,12 +27,6 @@ public class KitManager {
     }
 
     public Kit getKitByName(String name) {
-        for (Kit kit : kits) {
-            if (name.equals(kit.getName())) {
-                return kit;
-            }
-        }
-
-        return null;
+        return kits.stream().filter(kit -> name.equals(kit.getName())).findFirst().orElse(null);
     }
 }

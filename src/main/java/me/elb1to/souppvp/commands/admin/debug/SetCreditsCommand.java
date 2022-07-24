@@ -21,12 +21,12 @@ public class SetCreditsCommand extends BaseCommand {
         Player player = command.getPlayer();
         String[] args = command.getArgs();
 
-        if (args.length < 2) {
+        if (args.length != 2) {
             player.sendMessage(ColorHelper.translate("&cUsage: /setcredits <player> <credits>"));
             return;
         }
 
-        Player target = Bukkit.getPlayer(args[0]);
+        Player target = SoupPvP.getInstance().getServer().getPlayer(args[0]);
         if (target == null) {
             player.sendMessage(ColorHelper.translate("&cThere are no players named '" + args[0] + "' online."));
             return;

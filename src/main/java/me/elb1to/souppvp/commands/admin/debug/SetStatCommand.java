@@ -21,12 +21,12 @@ public class SetStatCommand extends BaseCommand {
         Player player = command.getPlayer();
         String[] args = command.getArgs();
 
-        if (args.length < 3) {
+        if (args.length != 3) {
             player.sendMessage(ColorHelper.translate("&c" + command.getCommand().getUsage()));
             return;
         }
 
-        Player target = Bukkit.getPlayer(args[0]);
+        Player target = SoupPvP.getInstance().getServer().getPlayer(args[0]);
         if (target == null) {
             player.sendMessage(ColorHelper.translate("&cThere are no players named '" + args[0] + "' online."));
             return;
